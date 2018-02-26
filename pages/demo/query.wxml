@@ -1,8 +1,8 @@
 <scroll-view class="scroll" scroll-y="true">
   <view class="separate"></view>
-  <view wx:for="{{carts}}">
+  <view wx:for="{{list}}">
     <view class="cart_container">
-      <image class="item-select" bindtap="switchSelect" data-index="{{index}}" data-id="{{index}}" src="{{item.isSelect?'/images/checked.png':'/images/uncheck.png'}}" />
+      <image class="item-select" bindtap="fnSwitchSelect" data-index="{{index}}" data-id="{{index}}" src="{{item.isSelect?'/images/checked.png':'/images/uncheck.png'}}" />
 
       <image class="item-image" src="{{item.tcPic}}"></image>
 
@@ -21,14 +21,17 @@
     <view class="separate"></view>
   </view>
 </scroll-view>
+<view class="weui-loadmore" hidden="{{isHideBottomLoading}}">
+  <view class="weui-loading"></view>
+  <view class="weui-loadmore__tips">正在加载</view>
+</view>
 <view class="bottom_total">
   <view class="bottom_line"></view>
-
   <view class="row">
-    <image class="item-allselect" bindtap="allSelect" src="{{isAllSelect?'/images/checked.png':'/images/uncheck.png'}}" />
+    <image class="item-allselect" bindtap="fnAllSelect" src="{{isAllSelect?'/images/checked.png':'/images/uncheck.png'}}" />
     <text class="small_text">全选</text>
     <text>合计:￥ </text>
     <text class="price">{{totalMoney}}</text>
-    <button class="button-red" bindtap="toBuy" formType="submit">去结算</button>
+    <button class="button-red" bindtap="fnToBuy" formType="submit">去结算</button>
   </view>
-</view>
+</view> 
