@@ -1,6 +1,9 @@
-.cart_container {
+.item {
   display: flex;
   flex-direction: row;
+  /* margin: 20px 20px 20px;
+  box-shadow: 1px 1px 5px gray;
+  border-radius:3px; */
 }
 .scroll {
    margin-bottom: 120rpx; 
@@ -39,8 +42,7 @@
 .item-select {
   width: 40rpx;
   height: 40rpx;
-  margin-top: 90rpx;
-  margin-left: 20rpx;
+  vertical-align: top;
 }
 .item-allselect {
   width: 40rpx;
@@ -50,7 +52,11 @@
 .item-image {
   width: 180rpx;
   height: 180rpx;
-  margin: 20rpx;
+  margin: 5rpx;
+}
+.item-content {
+  display: flex;
+  flex-direction: column;
 }
 .bottom_line {
   width: 100%;
@@ -63,8 +69,8 @@
   flex-direction: column;
   bottom: 0;
   width: 100%;
-  height: 120rpx;
-  line-height: 120rpx;
+  height: 80rpx;
+  line-height: 80rpx;
   background: white;
 }
 .button-red {
@@ -79,8 +85,8 @@ button {
   font-size: 30rpx;
   border-radius: 0rpx;
   width: 30%;
-  height: 120rpx;
-  line-height: 120rpx;
+  height: 80rpx;
+  line-height: 80rpx;
 }
 /*  加载更多   */
 .weui-loading {

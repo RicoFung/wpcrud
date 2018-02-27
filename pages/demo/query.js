@@ -286,9 +286,9 @@ Page(
     /**
      * 去删除
      */
-    tapToDelete: function() {
+    tapDelete: function() {
       wx.showToast({
-        title: '去删除',
+        title: '删除',
         icon: 'success',
         duration: 3000
       });
