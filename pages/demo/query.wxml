@@ -2,7 +2,7 @@
   <view class="separate"></view>
   <view wx:for="{{list}}">
     <view class="cart_container">
-      <image class="item-select" bindtap="fnSwitchSelect" data-index="{{index}}" data-id="{{index}}" src="{{item.isSelect?'/images/checked.png':'/images/uncheck.png'}}" />
+      <image class="item-select" bindtap="tapSwitchSelect" data-index="{{index}}" data-id="{{index}}" src="{{item.isSelect?'/images/checked.png':'/images/uncheck.png'}}" />
 
       <image class="item-image" src="{{item.tcPic}}"></image>
 
@@ -28,10 +28,10 @@
 <view class="bottom_total">
   <view class="bottom_line"></view>
   <view class="row">
-    <image class="item-allselect" bindtap="fnAllSelect" src="{{isAllSelect?'/images/checked.png':'/images/uncheck.png'}}" />
+    <image class="item-allselect" bindtap="tapSwitchSelectAll" src="{{isAllSelect?'/images/checked.png':'/images/uncheck.png'}}" />
     <text class="small_text">全选</text>
-    <text>合计:￥ </text>
-    <text class="price">{{totalMoney}}</text>
-    <button class="button-red" bindtap="fnToBuy" formType="submit">去结算</button>
+    <text>已选: </text>
+    <text class="price">{{totalSelected}}</text>
+    <button class="button-red" bindtap="tapToDelete" formType="submit">去删除</button>
   </view>
 </view> 

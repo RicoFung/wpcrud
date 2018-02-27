@@ -6,18 +6,22 @@ var DEFAULT_CONFIG = {
     offset: 0
   }
 };
-//
+// Page配置
 Page(
   {
     data: {
-      isAllSelect: false,
-      isHideBottomLoading: true,
-      totalMoney: 0,
-      // 商品详情介绍
-      list: [],
-      total: 0,
-      param: DEFAULT_CONFIG.param
+      param: DEFAULT_CONFIG.param, // 查询参数
+      list: [], // 查询结果集
+      total: 0, // 总数据条数
+      totalSelected: 0, // 总已选数据条数
+      isAllSelect: false, // 是否全选状态
+      isHideBottomLoading: true // 是否隐藏底部刷新标志
     },
+
+    /***********************************************************
+     * on 生命周期函数
+     ***********************************************************/
+
     /**
      * 生命周期函数--监听页面加载
      */
@@ -73,6 +77,10 @@ Page(
     onShareAppMessage: function () {
 
     },
+
+    /***********************************************************
+     * fn 函数 
+     ***********************************************************/
 
     /**
      * 显示Loading
@@ -142,6 +150,7 @@ Page(
         }
       })
     },
+
     /**
      * 刷新列表
      */
@@ -156,7 +165,9 @@ Page(
             limit: this.data.param.limit
           }
         });
-      } else {// 底部刷新
+        this.fnRefreshSelect("top");
+      } 
+      else {// 底部刷新
         var new_list = this.data.list.concat(data.rows);
         this.setData({
           list: new_list,
@@ -167,79 +178,122 @@ Page(
             limit: this.data.param.limit
           }
         });
+        this.fnRefreshSelect("bottom");
       }
     },
-    //勾选事件处理函数  
-    fnSwitchSelect: function (e) {
-      // 获取item项的id，和数组的下标值  
-      var Allprice = 0, i = 0;
-      let id = e.target.dataset.id,
 
-        index = parseInt(e.target.dataset.index);
+    /**
+     * 刷新选择状态
+     */
+    fnRefreshSelect: function (option) {
+      // 顶部刷新
+      if (option == "top") { 
+        this.setData({
+          isAllSelect: false,
+          totalSelected: 0
+        });
+      } 
+      // 底部刷新
+      else if (option == "bottom") {
+         // 全选
+        if (this.data.isAllSelect) { 
+          var countSelected = this.data.list.length;
+          for (var i = 0; i < this.data.list.length; i++) {
+            this.data.list[i].isSelect = true;
+          }
+          this.setData({
+            list: this.data.list,
+            isAllSelect: true,
+            totalSelected: countSelected
+          });
+        } 
+        // 非全选
+        else { 
+        }
+      }
+    },
+
+    /**
+     * 数量变化处理
+     */
+    fnHandleQuantityChange: function (e) {
+      var componentId = e.componentId;
+      var quantity = e.quantity;
+      this.data.list[componentId].count.quantity = quantity;
+      this.setData({
+        list: this.data.list
+      });
+    },
+
+    /***********************************************************
+     * bindtap 事件 
+     ***********************************************************/
+    /**
+     * 单选切换
+     */
+    tapSwitchSelect: function (e) {
+      // 获取item项的id，和数组的下标值  
+      let id = e.target.dataset.id;
+      let index = parseInt(e.target.dataset.index);
       this.data.list[index].isSelect = !this.data.list[index].isSelect;
-      //价钱统计
+      // 统计选项
       if (this.data.list[index].isSelect) {
-        this.data.totalMoney = this.data.totalMoney + this.data.list[index].price;
+        this.data.totalSelected++;
       }
       else {
-        this.data.totalMoney = this.data.totalMoney - this.data.list[index].price;
+        this.data.totalSelected--;
       }
-      //是否全选判断
-      for (i = 0; i < this.data.list.length; i++) {
-        Allprice = Allprice + this.data.list[i].price;
-      }
-      if (Allprice == this.data.totalMoney) {
+      // 全选判断
+      if (this.data.list.length == this.data.totalSelected) {
         this.data.isAllSelect = true;
       }
       else {
         this.data.isAllSelect = false;
       }
+      // 更新data
       this.setData({
         list: this.data.list,
-        totalMoney: this.data.totalMoney,
+        totalSelected: this.data.totalSelected,
         isAllSelect: this.data.isAllSelect,
-      })
+      });
     },
-    //全选
-    fnAllSelect: function (e) {
-      //处理全选逻辑
-      let i = 0;
+
+    /**
+     * 全选切换
+     */
+    tapSwitchSelectAll: function (e) {
+      // 处理全选逻辑
+      var countSelected = 0;
       if (!this.data.isAllSelect) {
-        for (i = 0; i < this.data.list.length; i++) {
+        for (var i = 0; i < this.data.list.length; i++) {
           this.data.list[i].isSelect = true;
-          this.data.totalMoney = this.data.totalMoney + this.data.list[i].price;
         }
-      }
-      else {
-        for (i = 0; i < this.data.list.length; i++) {
+        countSelected = this.data.list.length;
+      } else {
+        for (var i = 0; i < this.data.list.length; i++) {
           this.data.list[i].isSelect = false;
         }
-        this.data.totalMoney = 0;
+        countSelected = 0;
       }
+      // 更新data
       this.setData({
         list: this.data.list,
         isAllSelect: !this.data.isAllSelect,
-        totalMoney: this.data.totalMoney,
-      })
+        totalSelected: countSelected
+      });
     },
-    // 去结算
-    fnToBuy() {
+
+    /**
+     * 去删除
+     */
+    tapToDelete: function() {
       wx.showToast({
-        title: '去结算',
+        title: '去删除',
         icon: 'success',
         duration: 3000
       });
       this.setData({
         showDialog: !this.data.showDialog
-      });
-    },
-    //数量变化处理
-    fnHandleQuantityChange(e) {
-      var componentId = e.componentId;
-      var quantity = e.quantity;
-      this.data.list[componentId].count.quantity = quantity;
-      this.setData({
-        list: this.data.list,
       });
     }
   });
