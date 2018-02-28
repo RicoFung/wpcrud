@@ -4,7 +4,9 @@
     "pages/demo/add",
     "pages/demo/search",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/demo/update",
+    "pages/demo/get"
   ],
   "window": {
     "backgroundTextStyle": "light",

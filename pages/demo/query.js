@@ -133,11 +133,11 @@ Page(
           'content-type': 'application/json' // 默认值
         },
         success: function (res) {
-          console.log(res.data);
+          // console.log(res.data);
           that.fnRefreshList(res.data);
         },
         fail: function(res) {
-          console.log(res.data);
+          // console.log(res.data);
           wx.showModal({
             title: 'fail',
             content: JSON.stringify(res),
@@ -284,11 +284,27 @@ Page(
     },
 
     /**
-     * 去删除
+     * 添加
      */
-    tapDelete: function() {
+    tapAdd: function () {
+      wx.navigateTo({
+        url: "add"
+      });
+    },
+
+    /**
+     * 删除
+     */
+    tapDelete: function(e) {
+      console.log(e.currentTarget.dataset.tcRowid);
+    },
+
+    /**
+     * 批量删除
+     */
+    tapDeleteBatch: function (e) {
       wx.showToast({
-        title: '删除',
+        title: '批量删除',
         icon: 'success',
         duration: 3000
       });
@@ -297,14 +313,21 @@ Page(
       });
     },
 
-    tapActionSheet: function () {
-      wx.showActionSheet({
-        itemList: ['A', 'B', 'C'],
-        success: function (res) {
-          if (!res.cancel) {
-            console.log(res.tapIndex)
-          }
-        }
+    /**
+     * 修改
+     */
+    tapUpdate: function (e) {
+      wx.navigateTo({
+        url: "update?tcRowid="+e.currentTarget.dataset.tcRowid
+      });
+    },
+
+    /**
+     * 查询
+     */
+    tapSearch: function () {
+      wx.navigateTo({
+        url: "search"
       });
     }
   });

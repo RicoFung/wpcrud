@@ -1,0 +1,3 @@
+<!--pages/demo/update.wxml-->
+<text>pages/demo/update.wxml</text>
+{{tcRowid}}

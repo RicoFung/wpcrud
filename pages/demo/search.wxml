@@ -1,2 +1,55 @@
-<!--pages/demo/search.wxml-->
-<text>pages/demo/search.wxml</text>
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+    <view class="page__hd">
+        <view class="page__title">Search</view>
+        <view class="page__desc">查询</view>
+    </view>
+    <view class="page__bd">
+        <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
+
+        <view class="weui-cells__title">表单</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">名称</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入名称"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">开始日期</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker mode="date" value="{{fmDate}}" start="2015-01-01" end="2050-12-31" bindchange="changeFmDate">
+                        <view class="weui-input">{{fmDate}}</view>
+                    </picker>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker mode="time" value="{{fmTime}}" start="00:00" end="23:59" bindchange="changeFmTime">
+                        <view class="weui-input">{{fmTime}}</view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">结束日期</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker mode="date" value="{{toDate}}" start="2015-01-01" end="2050-12-31" bindchange="changeToDate">
+                        <view class="weui-input">{{toDate}}</view>
+                    </picker>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker mode="time" value="{{toTime}}" start="00:00" end="23:59" bindchange="changeToTime">
+                        <view class="weui-input">{{toTime}}</view>
+                    </picker>
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" bindtap="showTopTips">确定</button>
+        </view>
+    </view>
+</view>

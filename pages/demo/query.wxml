@@ -10,7 +10,7 @@
           <view class="item-select">
             <image class="image-button-select" bindtap="tapSwitchSelect" data-index="{{index}}" data-id="{{index}}" src="{{item.isSelect?'/images/checked.png':'/images/uncheck.png'}}" />
           </view>
-          <navigator url="" class="weui-cell weui-cell_access item-navigator" hover-class="weui-cell_active">
+          <navigator url="/pages/demo/get?tcRowid={{item.tcRowid}}" class="weui-cell weui-cell_access item-navigator" hover-class="weui-cell_active">
               <view class="weui-cell__hd">
                 <image class="item-navigator-image" src="{{item.tcPic}}"></image>
               </view>
@@ -23,10 +23,10 @@
         </view>
         <view class="weui-media-box__info item-toolbar">
           <view class="weui-media-box__info__meta">
-            <text class="iconfont icon-delete"/>
+            <text class="iconfont icon-delete" data-tc-rowid="{{item.tcRowid}}" bindtap="tapDelete"/>
           </view>
           <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">
-            <text class="iconfont icon-edit"/>
+            <text class="iconfont icon-edit" data-tc-rowid="{{item.tcRowid}}" bindtap="tapUpdate"/>
           </view>
         </view>
       </view>
@@ -41,7 +41,7 @@
   <image class="image-button-allselect" style="" bindtap="tapSwitchSelectAll" src="{{isAllSelect?'/images/checked.png':'/images/uncheck.png'}}" />
   <text class="footer-toolbar-qty">已选中：{{totalSelected}}</text>
   <text class="footer-toolbar-qty">共：{{total}}</text>
-  <button class="icon-button free-button-bordernone" style="position:fixed;right:0px;" bindtap="tapDelete" formType="submit"><text class="iconfont icon-delete"/></button>
+  <button class="icon-button free-button-bordernone" style="position:fixed;right:0px;" bindtap="tapDeleteBatch" formType="submit"><text class="iconfont icon-delete"/></button>
 </view>
 
 
