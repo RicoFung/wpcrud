@@ -11,28 +11,5 @@
     "navigationBarBackgroundColor": "#2aa515",
     "navigationBarTitleText": "小程序CRUD演示",
     "navigationBarTextStyle": "white"
-  },
-  "tabBar": {
-    "selectedColor": "#2aa515",
-    "list": [
-      {
-        "text": "列表",
-        "pagePath": "pages/demo/query",
-        "iconPath": "images/list_81.png",
-        "selectedIconPath": "images/list_81_green_dark.png"
-      },
-      {
-        "text": "添加",
-        "pagePath": "pages/demo/add",
-        "iconPath": "images/add_81.png",
-        "selectedIconPath": "images/add_81_green_dark.png"
-      },
-      {
-        "text": "查询",
-        "pagePath": "pages/demo/search",
-        "iconPath": "images/search_81.png",
-        "selectedIconPath": "images/search_81_green_dark.png"
-      }
-    ]
   }
 }

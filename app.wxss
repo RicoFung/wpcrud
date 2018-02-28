@@ -1,4 +1,5 @@
 @import 'style/weui.wxss';
+@import 'style/page.wxss';
 
 /**app.wxss**/
 .container {
@@ -21,6 +22,22 @@
   height: 25px;
   margin: 20rpx;
 }
+/* icon按钮 */
+.icon-button {
+  text-align: center;
+  display: inline-block;
+  font-size: 30rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+} 
+/*使用 button::after{ border: none; } 来去除边框*/
+.free-button-bordernone{
+  color: #000 !important;
+}
+.free-button-bordernone::after{
+  border: none;
+}
+
 /* icon  */
 @font-face {font-family: "iconfont";
   src: url('iconfont.eot?t=1519697850410'); /* IE9*/

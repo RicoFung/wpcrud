@@ -295,5 +295,16 @@ Page(
       this.setData({
         showDialog: !this.data.showDialog
       });
+    },
+
+    tapActionSheet: function () {
+      wx.showActionSheet({
+        itemList: ['A', 'B', 'C'],
+        success: function (res) {
+          if (!res.cancel) {
+            console.log(res.tapIndex)
+          }
+        }
+      });
     }
   });

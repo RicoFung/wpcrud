@@ -1,33 +1,46 @@
-<scroll-view class="scroll" scroll-y="true">
-  <view class="separate"></view>
-  <view wx:for="{{list}}">
-    <view class="weui-cells weui-cells_after-title">
-      <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-          <view class="weui-cell__hd">
-            <image class="item-select" bindtap="tapSwitchSelect" data-index="{{index}}" data-id="{{index}}" src="{{item.isSelect?'/images/checked.png':'/images/uncheck.png'}}" />
-            <image class="item-image" src="{{item.tcPic}}"></image>
-          </view>
-          <view class="weui-cell__bd item-content">
-            <text>{{item.tcName}}</text>
-            <text class="sku-price">￥{{item.tcPrice}}</text>
-          </view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-      </navigator>
-    </view>
-    <view class="separate"></view>
-  </view>
-</scroll-view>
-<view class="weui-loadmore" hidden="{{isHideBottomLoading}}">
-  <view class="weui-loading"></view>
-  <view class="weui-loadmore__tips">正在加载</view>
+<view class="header-toolbar">
+  <button class="icon-button free-button-bordernone" style="position:fixed;left:0px;" bindtap="tapSearch" formType="submit"><text class="iconfont icon-search"/></button>
+  <button class=" icon-button free-button-bordernone" style="position:fixed;right:0px;" bindtap="tapAdd" formType="submit"><text class="iconfont icon-add"/></button>
 </view>
-<view class="bottom_total">
-  <view class="bottom_line"></view>
-  <view class="row">
-    <image class="item-allselect" bindtap="tapSwitchSelectAll" src="{{isAllSelect?'/images/checked.png':'/images/uncheck.png'}}" />
-    <text class="small_text">全选</text>
-    <text>已选: </text>
-    <text class="price">{{totalSelected}}</text>
-    <button class="button-red" bindtap="tapDelete" formType="submit"><text class="iconfont icon-delete"/></button>
+<view class="page">
+  <view class="page__bd">
+    <scroll-view class="scroll" scroll-y="true">
+      <view class="weui-panel" wx:for="{{list}}">
+        <view class="item">
+          <view class="item-select">
+            <image class="image-button-select" bindtap="tapSwitchSelect" data-index="{{index}}" data-id="{{index}}" src="{{item.isSelect?'/images/checked.png':'/images/uncheck.png'}}" />
+          </view>
+          <navigator url="" class="weui-cell weui-cell_access item-navigator" hover-class="weui-cell_active">
+              <view class="weui-cell__hd">
+                <image class="item-navigator-image" src="{{item.tcPic}}"></image>
+              </view>
+              <view class="weui-cell__bd item-navigator-content">
+                <text class="item-navigator-content-text">{{item.tcName}}</text>
+                <text class="item-navigator-content-price">￥{{item.tcPrice}}</text>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          </navigator>
+        </view>
+        <view class="weui-media-box__info item-toolbar">
+          <view class="weui-media-box__info__meta">
+            <text class="iconfont icon-delete"/>
+          </view>
+          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">
+            <text class="iconfont icon-edit"/>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="weui-loadmore" hidden="{{isHideBottomLoading}}">
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips">正在加载</view>
+    </view>
   </view>
-</view> 
+</view>
+<view class="footer-toolbar">
+  <image class="image-button-allselect" style="" bindtap="tapSwitchSelectAll" src="{{isAllSelect?'/images/checked.png':'/images/uncheck.png'}}" />
+  <text class="totalSelected">{{totalSelected}}</text>
+  <button class="icon-button free-button-bordernone" style="position:fixed;right:0px;" bindtap="tapDelete" formType="submit"><text class="iconfont icon-delete"/></button>
+</view>
+
+
