@@ -22,6 +22,9 @@
   align-items: center;
   background-color: #F8F8F8;
 }
+.footer-toolbar-qty {
+  color: gray;
+}
 .image-button-select {
   width: 30rpx;
   height: 30rpx;
@@ -72,7 +75,4 @@
   justify-content: flex-end;
   padding: 10rpx;
   border-top: solid 1rpx lightgray;
-}
-.totalSelected {
-  color: gray;
 }
