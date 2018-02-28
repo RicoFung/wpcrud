@@ -39,7 +39,8 @@
 </view>
 <view class="footer-toolbar">
   <image class="image-button-allselect" style="" bindtap="tapSwitchSelectAll" src="{{isAllSelect?'/images/checked.png':'/images/uncheck.png'}}" />
-  <text class="totalSelected">{{totalSelected}}</text>
+  <text class="totalSelected">已选中：{{totalSelected}}</text>
+  <text class="totalSelected">共：{{total}}</text>
   <button class="icon-button free-button-bordernone" style="position:fixed;right:0px;" bindtap="tapDelete" formType="submit"><text class="iconfont icon-delete"/></button>
 </view>
 

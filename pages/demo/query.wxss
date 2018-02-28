@@ -74,5 +74,5 @@
   border-top: solid 1rpx lightgray;
 }
 .totalSelected {
-  color: red;
+  color: gray;
 }
