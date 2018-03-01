@@ -7,49 +7,52 @@
         <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
 
         <view class="weui-cells__title">表单</view>
-        <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell weui-cell_input">
-                <view class="weui-cell__hd">
-                    <view class="weui-label">名称</view>
-                </view>
-                <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入名称"/>
-                </view>
-            </view>
-            <view class="weui-cell weui-cell_input">
-                <view class="weui-cell__hd">
-                    <view class="weui-label">开始日期</view>
-                </view>
-                <view class="weui-cell__bd">
-                    <picker mode="date" value="{{fmDate}}" start="2015-01-01" end="2050-12-31" bindchange="changeFmDate">
-                        <view class="weui-input">{{fmDate}}</view>
-                    </picker>
-                </view>
-                <view class="weui-cell__bd">
-                    <picker mode="time" value="{{fmTime}}" start="00:00" end="23:59" bindchange="changeFmTime">
-                        <view class="weui-input">{{fmTime}}</view>
-                    </picker>
-                </view>
-            </view>
-            <view class="weui-cell weui-cell_input">
-                <view class="weui-cell__hd">
-                    <view class="weui-label">结束日期</view>
-                </view>
-                <view class="weui-cell__bd">
-                    <picker mode="date" value="{{toDate}}" start="2015-01-01" end="2050-12-31" bindchange="changeToDate">
-                        <view class="weui-input">{{toDate}}</view>
-                    </picker>
-                </view>
-                <view class="weui-cell__bd">
-                    <picker mode="time" value="{{toTime}}" start="00:00" end="23:59" bindchange="changeToTime">
-                        <view class="weui-input">{{toTime}}</view>
-                    </picker>
-                </view>
-            </view>
-        </view>
+        <form bindsubmit="formSubmit" bindreset="formReset">
+          <view class="weui-cells weui-cells_after-title">
+              <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                      <view class="weui-label">名称</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                      <input class="weui-input" name="tcName" placeholder="请输入名称"/>
+                  </view>
+              </view>
+              <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                      <view class="weui-label">开始日期</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                      <picker name="tcDateFm" mode="date" value="{{tcDateFm}}" start="2015-01-01" end="2050-12-31" bindchange="changeDateFm">
+                          <view class="weui-input">{{tcDateFm}}</view>
+                      </picker>
+                  </view>
+                  <view class="weui-cell__bd">
+                      <picker name="tcTimeFm" mode="time" value="{{tcTimeFm}}" start="00:00" end="23:59" bindchange="changeTimeFm">
+                          <view class="weui-input">{{tcTimeFm}}</view>
+                      </picker>
+                  </view>
+              </view>
+              <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                      <view class="weui-label">结束日期</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                      <picker name="tcDateTo" mode="date" value="{{tcDateTo}}" start="2015-01-01" end="2050-12-31" bindchange="changeDateTo">
+                          <view class="weui-input">{{tcDateTo}}</view>
+                      </picker>
+                  </view>
+                  <view class="weui-cell__bd">
+                      <picker name="tcTimeTo" mode="time" value="{{tcTimeTo}}" start="00:00" end="23:59" bindchange="changeTimeTo">
+                          <view class="weui-input">{{tcTimeTo}}</view>
+                      </picker>
+                  </view>
+              </view>
+          </view>
 
-        <view class="weui-btn-area">
-            <button class="weui-btn" type="primary" bindtap="showTopTips">确定</button>
-        </view>
+          <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" formType="submit">确定</button>
+            <button class="weui-btn" type="default" formType="reset">重置</button>
+          </view>
+        </form>
     </view>
 </view>

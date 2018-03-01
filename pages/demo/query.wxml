@@ -40,7 +40,7 @@
 <view class="footer-toolbar">
   <image class="image-button-allselect" style="" bindtap="tapSwitchSelectAll" src="{{isAllSelect?'/images/checked.png':'/images/uncheck.png'}}" />
   <text class="footer-toolbar-qty">已选中：{{totalSelected}}</text>
-  <text class="footer-toolbar-qty">共：{{total}}</text>
+  <text class="footer-toolbar-qty">共：{{totalNow}} / {{total}}</text>
   <button class="icon-button free-button-bordernone" style="position:fixed;right:0px;" bindtap="tapDeleteBatch" formType="submit"><text class="iconfont icon-delete"/></button>
 </view>
 
