@@ -1,19 +1,16 @@
-var moment = require('../../utils/moment');
+// 引入 js ////////////////////////////////////////
+var _setting_ = require('_setting_.js');
+//////////////////////////////////////////////////
 Page({
   data: {
     showTopTips: false,
-    tcName: '',
-    tcDateFm: moment("2018-01-01", "YYYY-MM-DD").format("l"),
-    tcTimeFm: "00:00:00",
-    tcDateTo: moment().format("l"),
-    tcTimeTo: "23:59:59"
+    param: _setting_.getDefaultParam(), // 查询参数
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var new_data = Object.assign({}, this.data, options);
-    this.setData(new_data);
+    _setting_.setParam(this, options);
   },
   // tapSearch: function () {
   //   var that = this;
@@ -27,22 +24,22 @@ Page({
   //   }, 3000);
   // },
   changeDateFm: function (e) {
-    this.setData({
+    _setting_.setParam(this, {
       tcDateFm: e.detail.value
     });
   },
   changeTimeFm: function (e) {
-    this.setData({
+    _setting_.setParam(this, {
       tcTimeFm: e.detail.value
     });
   },
   changeDateTo: function (e) {
-    this.setData({
+    _setting_.setParam(this, {
       tcDateTo: e.detail.value
     });
   },
   changeTimeTo: function (e) {
-    this.setData({
+    _setting_.setParam(this, {
       tcTimeTo: e.detail.value
     });
   },
@@ -63,5 +60,6 @@ Page({
    * 重置
    */
   formReset: function () {
+    _setting_.setParam(this, _setting_.getDefaultParam());
   }
 });

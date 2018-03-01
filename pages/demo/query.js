@@ -1,22 +1,10 @@
-var moment = require('../../utils/moment');
-// 默认配置
-var DEFAULT_CONFIG = {
-  param: {
-    order: 'asc',
-    limit: 5,
-    offset: 0,
-    tcName: '',
-    tcDateFm: moment("2018-01-01", "YYYY-MM-DD").format("l"),
-    tcTimeFm: "00:00:00",
-    tcDateTo: moment().format("l"),
-    tcTimeTo: "23:59:59"
-  }
-};
-// Page配置
+// 引入 js ////////////////////////////////////////
+var _setting_ = require('_setting_.js');
+//////////////////////////////////////////////////
 Page(
   {
     data: {
-      param: DEFAULT_CONFIG.param, // 查询参数
+      param: _setting_.getDefaultParam(), // 查询参数
       list: [], // 查询结果集
       total: 0, // 总数据条数
       totalNow: 0, // 已加载数据条数
@@ -33,10 +21,7 @@ Page(
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-      var new_param = Object.assign({}, this.data.param, options);
-      this.setData({
-        param: new_param
-      });
+      _setting_.setParam(this, options);
       this.fnGetList();
     },
 
@@ -115,17 +100,11 @@ Page(
      * 顶部刷新
      */
     fnUpperRefresh: function () {
-      var new_param = Object.assign(
-        {}, 
-        this.data.param, 
-        { 
-          order: DEFAULT_CONFIG.param.order,
-          limit: DEFAULT_CONFIG.param.limit,
-          offset: DEFAULT_CONFIG.param.offset 
-        }
-      );
-      this.setData({
-        param: new_param
+      _setting_.setParam(this,
+      {
+        order: _setting_.getDefaultParam().order,
+        limit: _setting_.getDefaultParam().limit,
+        offset: _setting_.getDefaultParam().offset
       });
       this.fnGetList();
     },
@@ -176,9 +155,8 @@ Page(
      */
     fnRefreshList: function(data) {
       if(this.data.param.offset==0) {// 顶部刷新
-        var new_param = Object.assign({}, this.data.param, {offset: this.data.param.offset + data.rows.length});
+        _setting_.setParam(this, { offset: this.data.param.offset + data.rows.length });
         this.setData({
-          param: new_param,
           list: data.rows,
           total: data.total,
           totalNow: data.rows.length
@@ -186,10 +164,9 @@ Page(
         this.fnRefreshSelect("top");
       } 
       else {// 底部刷新
+        _setting_.setParam(this, { offset: this.data.param.offset + this.data.param.limit });
         var new_list = this.data.list.concat(data.rows);
-        var new_param = Object.assign({}, this.data.param, { offset: this.data.param.offset + this.data.param.limit });
         this.setData({
-          param: new_param,
           list: new_list,
           total: data.total,
           totalNow: new_list.length
@@ -330,6 +307,7 @@ Page(
      * 查询
      */
     tapSearch: function () {
+      console.log(this.data.param);
       wx.navigateTo({
         url: "search"
         + '?tcName=' + this.data.param.tcName

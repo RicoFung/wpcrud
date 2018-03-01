@@ -1,6 +1,10 @@
 <view class="header-toolbar">
-  <button class="icon-button free-button-bordernone" style="position:fixed;left:0px;" bindtap="tapSearch" formType="submit"><text class="iconfont icon-search"/></button>
-  <button class=" icon-button free-button-bordernone" style="position:fixed;right:0px;" bindtap="tapAdd" formType="submit"><text class="iconfont icon-add"/></button>
+  <button class="icon-button free-button-bordernone" style="position:fixed;left:0px;" bindtap="tapSearch" formType="submit">
+    <text class="iconfont icon-search" />
+  </button>
+  <button class=" icon-button free-button-bordernone" style="position:fixed;right:0px;" bindtap="tapAdd" formType="submit">
+    <text class="iconfont icon-add" />
+  </button>
 </view>
 <view class="page">
   <view class="page__bd">
@@ -11,22 +15,22 @@
             <image class="image-button-select" bindtap="tapSwitchSelect" data-index="{{index}}" data-id="{{index}}" src="{{item.isSelect?'/images/checked.png':'/images/uncheck.png'}}" />
           </view>
           <navigator url="/pages/demo/get?tcRowid={{item.tcRowid}}" class="weui-cell weui-cell_access item-navigator" hover-class="weui-cell_active">
-              <view class="weui-cell__hd">
-                <image class="item-navigator-image" src="{{item.tcPic}}"></image>
-              </view>
-              <view class="weui-cell__bd item-navigator-content">
-                <text class="item-navigator-content-text">{{item.tcName}}</text>
-                <text class="item-navigator-content-price">￥{{item.tcPrice}}</text>
-              </view>
-              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            <view class="weui-cell__hd">
+              <image class="item-navigator-image" src="{{item.tcPic}}"></image>
+            </view>
+            <view class="weui-cell__bd item-navigator-content">
+              <text class="item-navigator-content-text">{{item.tcName}}</text>
+              <text class="item-navigator-content-price">￥{{item.tcPrice}}</text>
+            </view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
           </navigator>
         </view>
         <view class="weui-media-box__info item-toolbar">
           <view class="weui-media-box__info__meta">
-            <text class="iconfont icon-delete" data-tc-rowid="{{item.tcRowid}}" bindtap="tapDelete"/>
+            <text class="iconfont icon-delete" data-tc-rowid="{{item.tcRowid}}" bindtap="tapDelete" />
           </view>
           <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">
-            <text class="iconfont icon-edit" data-tc-rowid="{{item.tcRowid}}" bindtap="tapUpdate"/>
+            <text class="iconfont icon-edit" data-tc-rowid="{{item.tcRowid}}" bindtap="tapUpdate" />
           </view>
         </view>
       </view>
@@ -41,7 +45,7 @@
   <image class="image-button-allselect" style="" bindtap="tapSwitchSelectAll" src="{{isAllSelect?'/images/checked.png':'/images/uncheck.png'}}" />
   <text class="footer-toolbar-qty">已选中：{{totalSelected}}</text>
   <text class="footer-toolbar-qty">共：{{totalNow}} / {{total}}</text>
-  <button class="icon-button free-button-bordernone" style="position:fixed;right:0px;" bindtap="tapDeleteBatch" formType="submit"><text class="iconfont icon-delete"/></button>
+  <button class="icon-button free-button-bordernone" style="position:fixed;right:0px;" bindtap="tapDeleteBatch" formType="submit">
+    <text class="iconfont icon-delete" />
+  </button>
 </view>
-
-
