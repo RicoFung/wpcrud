@@ -1,3 +1,53 @@
-<!--pages/demo/get.wxml-->
-<text>pages/demo/get.wxml</text>
-{{tcRowid}}
+<scroll-view class="scroll" scroll-y="true">
+  <view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+    <view class="page__hd">
+      <view class="page__title">Detail</view>
+      <view class="page__desc">明细</view>
+    </view>
+    <view class="page__bd">
+      <view class="weui-cells__title">表单</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">主键</view>
+          </view>
+          <view class="weui-cell__bd">
+            <view class="weui-input">{{tcRowid}}</view>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">图片</view>
+          </view>
+          <view class="weui-cell__bd">
+            <view class="weui-input">{{tcPic}}</view>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">名称</view>
+          </view>
+          <view class="weui-cell__bd">
+            <view class="weui-input">{{tcName}}</view>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">价钱</view>
+          </view>
+          <view class="weui-cell__bd">
+            <view class="weui-input">￥{{tcPrice}}</view>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">日期</view>
+          </view>
+          <view class="weui-cell__bd">
+            <view class="weui-input">{{tcDate}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

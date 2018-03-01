@@ -125,8 +125,8 @@ Page(
       that.fnShowBottomLoading(); // 显示底部加载
       wx.showNavigationBarLoading(); //在标题栏中显示加载
       wx.request({
-        //url: 'https://119.23.57.155:9443/wp_crud/wp/tbdemo/query2.action',
-        url: 'http://localhost:9090/wp_crud/wp/tbdemo/query2.action', //仅为示例，并非真实的接口地址
+        //url: 'https://119.23.57.155:9443/wp_crud/api/wp/tbdemo/query2.action',
+        url: 'http://localhost:9090/wp_crud/wp/api/tbdemo/query2.action', //仅为示例，并非真实的接口地址
         data: that.data.param,
         header: {
           'content-type': 'application/json' // 默认值
@@ -140,6 +140,7 @@ Page(
           wx.showModal({
             title: 'fail',
             content: JSON.stringify(res),
+            showCancel: false
           });
         },
         complete: function () {
