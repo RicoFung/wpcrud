@@ -10,7 +10,7 @@ function getDefaultParam() {
     tcName: '',
     tcDateFm: moment("2018-01-01", "YYYY-MM-DD").format("l"),
     tcTimeFm: "00:00:00",
-    tcDateTo: moment().format("l"),
+    tcDateTo: moment("2020-01-01", "YYYY-MM-DD").format("l"),
     tcTimeTo: "23:59:59"
   };
 }

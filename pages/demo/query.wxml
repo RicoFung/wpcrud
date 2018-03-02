@@ -27,6 +27,9 @@
         </view>
         <view class="weui-media-box__info item-toolbar">
           <view class="weui-media-box__info__meta">
+            <text>{{item.tcDate}}</text>
+          </view>
+          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">
             <text class="iconfont icon-delete" data-tc-rowid="{{item.tcRowid}}" bindtap="tapDelete" />
           </view>
           <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">
