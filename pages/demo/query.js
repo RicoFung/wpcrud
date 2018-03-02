@@ -126,19 +126,26 @@ Page(
       wx.showNavigationBarLoading(); //在标题栏中显示加载
       wx.request({
         //url: 'https://119.23.57.155:9443/wp_crud/api/wp/tbdemo/query2.action',
-        url: 'http://localhost:9090/wp_crud/wp/api/tbdemo/query2.action', //仅为示例，并非真实的接口地址
+        url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/query2.action', //仅为示例，并非真实的接口地址
         data: that.data.param,
         header: {
           'content-type': 'application/json' // 默认值
         },
         success: function (res) {
-          // console.log(res.data);
-          that.fnRefreshList(res.data);
+          if (res.statusCode == "200") {
+            that.fnRefreshData(res.data);
+          } else {
+            wx.showModal({
+              title: 'Fail',
+              content: JSON.stringify(res),
+              showCancel: false
+            });
+          }
         },
         fail: function(res) {
-          // console.log(res.data);
+          //  console.log(res);
           wx.showModal({
-            title: 'fail',
+            title: 'Fail',
             content: JSON.stringify(res),
             showCancel: false
           });
@@ -154,7 +161,7 @@ Page(
     /**
      * 刷新列表
      */
-    fnRefreshList: function(data) {
+    fnRefreshData: function(data) {
       if(this.data.param.offset==0) {// 顶部刷新
         _setting_.setParam(this, { offset: this.data.param.offset + data.rows.length });
         this.setData({

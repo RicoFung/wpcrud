@@ -90,14 +90,21 @@ Page({
     wx.showLoading({title: '加载中'});
     wx.request({
       //url: 'https://119.23.57.155:9443/wp_crud/wp/tbdemo/get.action',
-      url: 'http://localhost:9090/wp_crud/wp/api/tbdemo/get.action', //仅为示例，并非真实的接口地址
+      url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/get.action', //仅为示例，并非真实的接口地址
       data: {tcRowid: that.data.tcRowid},
       header: {
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-        // console.log(res.data);
-        that.fnRefreshData(res.data);
+        if (res.statusCode == "200") {
+          that.fnRefreshData(res.data);
+        } else {
+          wx.showModal({
+            title: 'Fail',
+            content: JSON.stringify(res),
+            showCancel: false
+          });
+        }
       },
       fail: function (res) {
         // console.log(res.data);
