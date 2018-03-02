@@ -5,7 +5,7 @@ Page(
   {
     data: {
       param: _setting_.getDefaultParam(), // 查询参数
-      list: [], // 查询结果集
+      rows: [], // 查询结果集
       total: 0, // 总数据条数
       totalNow: 0, // 已加载数据条数
       totalSelected: 0, // 总已选数据条数
@@ -113,7 +113,7 @@ Page(
      * 底部刷新
      */
     fnLowerRefresh: function () {
-      if (this.data.total > 0 && this.data.list.length == this.data.total) return;
+      if (this.data.total > 0 && this.data.rows.length == this.data.total) return;
       this.fnGetList();
     },
 
@@ -174,7 +174,7 @@ Page(
       if(this.data.param.offset==0) {// 顶部刷新
         _setting_.setParam(this, { offset: this.data.param.offset + data.rows.length });
         this.setData({
-          list: data.rows,
+          rows: data.rows,
           total: data.total,
           totalNow: data.rows.length
         });
@@ -182,11 +182,11 @@ Page(
       } 
       else {// 底部刷新
         _setting_.setParam(this, { offset: this.data.param.offset + this.data.param.limit });
-        var new_list = this.data.list.concat(data.rows);
+        var new_rows = this.data.rows.concat(data.rows);
         this.setData({
-          list: new_list,
+          rows: new_rows,
           total: data.total,
-          totalNow: new_list.length
+          totalNow: new_rows.length
         });
         this.fnRefreshSelect("bottom");
       }
@@ -207,12 +207,12 @@ Page(
       else if (option == "bottom") {
          // 全选
         if (this.data.isAllSelect) { 
-          var countSelected = this.data.list.length;
-          for (var i = 0; i < this.data.list.length; i++) {
-            this.data.list[i].isSelect = true;
+          var countSelected = this.data.rows.length;
+          for (var i = 0; i < this.data.rows.length; i++) {
+            this.data.rows[i].isSelect = true;
           }
           this.setData({
-            list: this.data.list,
+            rows: this.data.rows,
             isAllSelect: true,
             totalSelected: countSelected
           });
@@ -233,16 +233,16 @@ Page(
       // 获取item项的id，和数组的下标值  
       let id = e.target.dataset.id;
       let index = parseInt(e.target.dataset.index);
-      this.data.list[index].isSelect = !this.data.list[index].isSelect;
+      this.data.rows[index].isSelect = !this.data.rows[index].isSelect;
       // 统计选项
-      if (this.data.list[index].isSelect) {
+      if (this.data.rows[index].isSelect) {
         this.data.totalSelected++;
       }
       else {
         this.data.totalSelected--;
       }
       // 全选判断
-      if (this.data.list.length == this.data.totalSelected) {
+      if (this.data.rows.length == this.data.totalSelected) {
         this.data.isAllSelect = true;
       }
       else {
@@ -250,7 +250,7 @@ Page(
       }
       // 更新data
       this.setData({
-        list: this.data.list,
+        rows: this.data.rows,
         totalSelected: this.data.totalSelected,
         isAllSelect: this.data.isAllSelect,
       });
@@ -263,19 +263,19 @@ Page(
       // 处理全选逻辑
       var countSelected = 0;
       if (!this.data.isAllSelect) {
-        for (var i = 0; i < this.data.list.length; i++) {
-          this.data.list[i].isSelect = true;
+        for (var i = 0; i < this.data.rows.length; i++) {
+          this.data.rows[i].isSelect = true;
         }
-        countSelected = this.data.list.length;
+        countSelected = this.data.rows.length;
       } else {
-        for (var i = 0; i < this.data.list.length; i++) {
-          this.data.list[i].isSelect = false;
+        for (var i = 0; i < this.data.rows.length; i++) {
+          this.data.rows[i].isSelect = false;
         }
         countSelected = 0;
       }
       // 更新data
       this.setData({
-        list: this.data.list,
+        rows: this.data.rows,
         isAllSelect: !this.data.isAllSelect,
         totalSelected: countSelected
       });

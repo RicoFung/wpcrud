@@ -29,7 +29,8 @@
             <view class="weui-cell__hd">
               <view class="weui-label">价钱</view>
             </view>
-            <view class="weui-cell__bd">
+            <view class="weui-cell__bd cell-price">
+              <view class="weui-input cell-currency">¥</view>
               <input type="digit" class="weui-input" name="tcPrice" placeholder="请输入价钱" value="{{tcPrice}}" />
             </view>
           </view>

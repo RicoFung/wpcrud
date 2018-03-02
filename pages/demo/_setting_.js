@@ -1,10 +1,14 @@
+// 引入 js ////////////////////////////////////////
+import WxValidate from '../../utils/WxValidate'
 var moment = require('../../utils/moment');
+//////////////////////////////////////////////////
 /**
  * 获取默认param
  */
 function getDefaultParam() {
   return {
-    order: 'asc',
+    order: 'desc',
+    sort: 'tcRowid',
     limit: 5,
     offset: 0,
     tcName: '',
@@ -21,10 +25,38 @@ function setParam(_this, _param) {
   var new_param = Object.assign({}, _this.data.param, _param);
   _this.setData({ param: new_param });
 }
+
+/**
+ * 自定义表单校验
+ */
+function initValidate() {
+  // 验证字段的规则
+  const rules = {
+    tcName: {
+      required: true
+    },
+    tcPrice: {
+      required: true,
+      number: true
+    }
+  };
+  // 验证字段的提示信息，若不传则调用默认的信息
+  const messages = {
+    tcName: {
+      required: '请输入名称'
+    },
+    tcPrice: {
+      required: '请输入价钱'
+    }
+  };
+  // 创建实例对象
+  this.WxValidate = new WxValidate(rules, messages);
+}
 /** 
  * export
  */
 module.exports = {
   getDefaultParam: getDefaultParam,
-  setParam: setParam
+  setParam: setParam,
+  initValidate: initValidate
 }

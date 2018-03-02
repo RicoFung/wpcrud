@@ -78,3 +78,13 @@
 .icon-add:before { content: "\e6b9"; }
 
 .icon-save:before { content: "\e747"; }
+
+.cell-price{
+  color: red;
+  display: flex;
+  flex-direction: row;
+}
+
+.cell-currency {
+  margin-right: 5px;
+}

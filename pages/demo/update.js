@@ -1,7 +1,9 @@
 // pages/demo/update.js
-
+// 引入 js ////////////////////////////////////////
+var moment = require('../../utils/moment');
+var _setting_ = require('_setting_.js');
+//////////////////////////////////////////////////
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -19,6 +21,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    _setting_.initValidate();
     this.setData({
       tcRowid: options.tcRowid
     });
@@ -166,6 +169,16 @@ Page({
    * 提交
    */
   formSubmit: function (e) {
+    // 传入表单数据，调用验证方法
+    if (!_setting_.WxValidate.checkForm(e)) {
+      var error = _setting_.WxValidate.errorList[0];
+      wx.showModal({
+        content: error.msg,
+        showCancel: false
+      });
+      return false;
+    }
+    // 发送请求
     var that = this;
     wx.showNavigationBarLoading(); //在标题栏中显示加载
     wx.showLoading({ title: '保存中' });
@@ -219,15 +232,14 @@ Page({
    * 重置
    */
   formReset: function () {
-    var arr = this.data.tcDate.split(" ");
     this.setData({
       tcRowid: this.data.tcRowid,
       tcPic: this.data.tcPic,
       tcName: this.data.tcName,
       tcPrice: this.data.tcPrice,
-      tcDate: this.data.tcDate,
-      vDate: arr[0],
-      vTime: arr[1].substr(0, 5)
+      tcDate: moment().format("YYYY-MM-DD h:mm"),
+      vDate: moment().format("l"),
+      vTime: moment().format("h:mm")
     });
   }
 })

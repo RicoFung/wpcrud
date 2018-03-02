@@ -9,10 +9,10 @@
 <view class="page">
   <view class="page__bd">
     <scroll-view class="scroll" scroll-y="true">
-      <view class="weui-panel" wx:for="{{list}}">
+      <view class="weui-panel" wx:for="{{rows}}">
         <view class="item">
           <view class="item-select">
-            <image class="image-button-select" bindtap="tapSwitchSelect" data-index="{{index}}" data-id="{{index}}" src="{{item.isSelect?'/images/checked.png':'/images/uncheck.png'}}" />
+            <icon class="icon-select" bindtap="tapSwitchSelect" data-index="{{index}}" data-id="{{index}}" type="{{item.isSelect?'success':'circle'}}" size="16"/>
           </view>
           <navigator url="/pages/demo/get?tcRowid={{item.tcRowid}}" class="weui-cell weui-cell_access item-navigator" hover-class="weui-cell_active">
             <view class="weui-cell__hd">
@@ -45,7 +45,7 @@
   </view>
 </view>
 <view class="footer-toolbar">
-  <image class="image-button-allselect" style="" bindtap="tapSwitchSelectAll" src="{{isAllSelect?'/images/checked.png':'/images/uncheck.png'}}" />
+  <icon class="icon-allselect" bindtap="tapSwitchSelectAll" type="{{isAllSelect?'success':'circle'}}" size="16"/>
   <text class="footer-toolbar-qty">已选中：{{totalSelected}}</text>
   <text class="footer-toolbar-qty">共：{{totalNow}} / {{total}}</text>
   <button class="icon-button free-button-bordernone" style="position:fixed;right:0px;" bindtap="tapDeleteBatch" formType="submit">

@@ -26,12 +26,12 @@
 .footer-toolbar-qty {
   color: gray;
 }
-.image-button-select {
+.icon-select {
   width: 30rpx;
   height: 30rpx;
   vertical-align: top;
 }
-.image-button-allselect {
+.icon-allselect {
   position:fixed;
   left:0px;
   width: 30rpx;

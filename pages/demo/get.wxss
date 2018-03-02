@@ -1,1 +1,4 @@
 /* pages/demo/get.wxss */
+.cell-price{
+  color: red;
+}

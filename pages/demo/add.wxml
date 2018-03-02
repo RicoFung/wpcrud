@@ -1,2 +1,59 @@
-<!--pages/demo/add.wxml-->
-<text>pages/demo/add.wxml</text>
+<scroll-view class="scroll" scroll-y="true">
+  <view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+    <view class="page__hd">
+      <view class="page__title">Add</view>
+      <view class="page__desc">添加</view>
+    </view>
+    <view class="page__bd">
+      <view class="weui-cells__title">表单</view>
+      <form bindsubmit="formSubmit" bindreset="formReset">
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">图片</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" name="tcPic" value="" />
+            </view>
+          </view>
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">名称</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" name="tcName" placeholder="请输入名称" value="" />
+            </view>
+          </view>
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">价钱</view>
+            </view>
+            <view class="weui-cell__bd cell-price">
+              <view class="weui-input cell-currency">¥</view>
+              <input type="digit" class="weui-input" name="tcPrice" placeholder="请输入价钱" value="" />
+            </view>
+          </view>
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">日期</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker name="vDate" mode="date" value="{{vDate}}" start="2015-01-01" end="2050-12-31" bindchange="changeDate">
+                <view class="weui-input">{{vDate}}</view>
+              </picker>
+            </view>
+            <view class="weui-cell__bd">
+              <picker name="vTime" mode="time" value="{{vTime}}" start="00:00" end="23:59" bindchange="changeTime">
+                <view class="weui-input">{{vTime}}</view>
+              </picker>
+            </view>
+          </view>
+        </view>
+        <view class="weui-btn-area">
+          <button class="weui-btn" type="primary" formType="submit">确定</button>
+          <button class="weui-btn" type="default" formType="reset">重置</button>
+        </view>
+      </form>
+    </view>
+  </view>
+</scroll-view>

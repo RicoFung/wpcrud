@@ -36,7 +36,7 @@
             <view class="weui-label">价钱</view>
           </view>
           <view class="weui-cell__bd">
-            <view class="weui-input">￥{{tcPrice}}</view>
+            <view class="weui-input cell-price">￥{{tcPrice}}</view>
           </view>
         </view>
         <view class="weui-cell weui-cell_input">
