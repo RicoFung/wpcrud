@@ -97,7 +97,16 @@ Page({
       },
       success: function (res) {
         if (res.statusCode == "200") {
-          that.fnRefreshData(res.data);
+          if (res.data.success) {
+            that.fnRefreshData(res.data.data);
+          }
+          else {
+            wx.showModal({
+              title: 'Fail',
+              content: JSON.stringify(res.data.msg),
+              showCancel: false
+            });
+          }
         } else {
           wx.showModal({
             title: 'Fail',

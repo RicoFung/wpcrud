@@ -125,15 +125,24 @@ Page(
       that.fnShowBottomLoading(); // 显示底部加载
       wx.showNavigationBarLoading(); //在标题栏中显示加载
       wx.request({
-        //url: 'https://119.23.57.155:9443/wp_crud/api/wp/tbdemo/query2.action',
-        url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/query2.action', //仅为示例，并非真实的接口地址
+        //url: 'https://119.23.57.155:9443/wp_crud/api/wp/tbdemo/query.action',
+        url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/query.action', //仅为示例，并非真实的接口地址
         data: that.data.param,
         header: {
           'content-type': 'application/json' // 默认值
         },
         success: function (res) {
           if (res.statusCode == "200") {
-            that.fnRefreshData(res.data);
+            if (res.data.success) {
+              that.fnRefreshData(res.data.data);
+            }
+            else {
+              wx.showModal({
+                title: 'Fail',
+                content: JSON.stringify(res.data.msg),
+                showCancel: false
+              });
+            }
           } else {
             wx.showModal({
               title: 'Fail',
