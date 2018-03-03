@@ -14,6 +14,19 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+function getSelectedValues (key, rows) {
+  var s = '';
+  for (var i = 0; i < rows.length; i++) {
+    var r = rows[i];
+    if (r.isSelect) {
+      s = s + r[key] + ',';
+    }
+  }
+  s = s.substring(0, s.length - 1);
+  return s;
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  getSelectedValues: getSelectedValues
 }

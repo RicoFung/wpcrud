@@ -52,6 +52,7 @@ function initValidate() {
   // 创建实例对象
   this.WxValidate = new WxValidate(rules, messages);
 }
+
 /** 
  * export
  */

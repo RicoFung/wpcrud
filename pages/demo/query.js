@@ -1,4 +1,5 @@
 // 引入 js ////////////////////////////////////////
+var util = require('../../utils/util.js');
 var _setting_ = require('_setting_.js');
 //////////////////////////////////////////////////
 Page(
@@ -295,19 +296,102 @@ Page(
      */
     tapDelete: function(e) {
       console.log(e.currentTarget.dataset.tcRowid);
+      var that = this;
+      wx.showLoading({ title: '保存中' });; // 显示加载
+      wx.showNavigationBarLoading(); //在标题栏中显示加载
+      wx.request({
+        //url: 'https://119.23.57.155:9443/wp_crud/api/wp/tbdemo/query.action',
+        url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/del.action', //仅为示例，并非真实的接口地址
+        method: 'POST',
+        data: { "tcRowid": e.currentTarget.dataset.tcRowid},
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        success: function (res) {
+          if (res.statusCode == "200") {
+            if (res.data.success) {
+              that.fnUpperRefresh();
+            }
+            else {
+              wx.showModal({
+                title: 'Fail',
+                content: JSON.stringify(res.data.msg),
+                showCancel: false
+              });
+            }
+          } else {
+            wx.showModal({
+              title: 'Fail',
+              content: JSON.stringify(res),
+              showCancel: false
+            });
+          }
+        },
+        fail: function (res) {
+          //  console.log(res);
+          wx.showModal({
+            title: 'Fail',
+            content: JSON.stringify(res),
+            showCancel: false
+          });
+        },
+        complete: function () {
+          wx.hideLoading(); //隐藏加载
+          wx.hideNavigationBarLoading(); //完成停止加载
+          wx.stopPullDownRefresh(); //停止下拉刷新
+        }
+      });
     },
 
     /**
      * 批量删除
      */
     tapDeleteBatch: function (e) {
-      wx.showToast({
-        title: '批量删除',
-        icon: 'success',
-        duration: 3000
-      });
-      this.setData({
-        showDialog: !this.data.showDialog
+      var v = util.getSelectedValues('tcRowid', this.data.rows);
+      var that = this;
+      wx.showLoading({ title: '保存中' });; // 显示加载
+      wx.showNavigationBarLoading(); //在标题栏中显示加载
+      wx.request({
+        //url: 'https://119.23.57.155:9443/wp_crud/api/wp/tbdemo/query.action',
+        url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/del.action', //仅为示例，并非真实的接口地址
+        method: 'POST',
+        data: {tcRowid: v},
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        success: function (res) {
+          if (res.statusCode == "200") {
+            if (res.data.success) {
+              that.fnUpperRefresh();
+            }
+            else {
+              wx.showModal({
+                title: 'Fail',
+                content: JSON.stringify(res.data.msg),
+                showCancel: false
+              });
+            }
+          } else {
+            wx.showModal({
+              title: 'Fail',
+              content: JSON.stringify(res),
+              showCancel: false
+            });
+          }
+        },
+        fail: function (res) {
+          //  console.log(res);
+          wx.showModal({
+            title: 'Fail',
+            content: JSON.stringify(res),
+            showCancel: false
+          });
+        },
+        complete: function () {
+          wx.hideLoading(); //隐藏加载
+          wx.hideNavigationBarLoading(); //完成停止加载
+          wx.stopPullDownRefresh(); //停止下拉刷新
+        }
       });
     },
 
