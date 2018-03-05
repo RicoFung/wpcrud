@@ -266,20 +266,28 @@ Page(
     /**
      * 删除
      */
-    tapDelete: function(e) {
+    tapDelete: function (e) {
       var that = this;
-      request.send({
-        url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/del.action',
-        method: 'POST',
-        header: {
-          'content-type': 'application/x-www-form-urlencoded'
-        },
-        data: { "tcRowid": e.currentTarget.dataset.tcRowid },
-        onRequestSuccess: function (res) {
-          that.fnUpperRefresh();
-        },
-        onRequestComplete: function (res) {
-          wx.stopPullDownRefresh(); // 停止下拉刷新
+      wx.showModal({
+        title: '提示',
+        content: '确认删除？',
+        success: function (res) {
+          if (res.confirm) {
+            request.send({
+              url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/del.action',
+              method: 'POST',
+              header: {
+                'content-type': 'application/x-www-form-urlencoded'
+              },
+              data: { "tcRowid": e.currentTarget.dataset.tcRowid },
+              onRequestSuccess: function (res) {
+                that.fnUpperRefresh();
+              },
+              onRequestComplete: function (res) {
+                wx.stopPullDownRefresh(); // 停止下拉刷新
+              }
+            });
+          }
         }
       });
     },
@@ -288,20 +296,28 @@ Page(
      * 批量删除
      */
     tapDeleteBatch: function (e) {
-      var v = util.getSelectedValues('tcRowid', this.data.rows);
       var that = this;
-      request.send({
-        url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/del.action',
-        method: 'POST',
-        header: {
-          'content-type': 'application/x-www-form-urlencoded'
-        },
-        data: { "tcRowid": v },
-        onRequestSuccess: function (res) {
-          that.fnUpperRefresh();
-        },
-        onRequestComplete: function (res) {
-          wx.stopPullDownRefresh(); // 停止下拉刷新
+      wx.showModal({
+        title: '提示',
+        content: '确认删除？',
+        success: function (res) {
+          if (res.confirm) {
+            var v = util.getSelectedValues('tcRowid', that.data.rows);
+            request.send({
+              url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/del.action',
+              method: 'POST',
+              header: {
+                'content-type': 'application/x-www-form-urlencoded'
+              },
+              data: { "tcRowid": v },
+              onRequestSuccess: function (res) {
+                that.fnUpperRefresh();
+              },
+              onRequestComplete: function (res) {
+                wx.stopPullDownRefresh(); // 停止下拉刷新
+              }
+            });
+          }
         }
       });
     },
