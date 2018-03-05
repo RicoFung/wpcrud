@@ -1,9 +1,8 @@
 // 引入 js ////////////////////////////////////////
-var _setting_ = require('_setting_.js');
+var _setting_ = require('_setting_');
 //////////////////////////////////////////////////
 Page({
   data: {
-    showTopTips: false,
     param: _setting_.getDefaultParam(), // 查询参数
   },
   /**
@@ -12,17 +11,6 @@ Page({
   onLoad: function (options) {
     _setting_.setParam(this, options);
   },
-  // tapSearch: function () {
-  //   var that = this;
-  //   this.setData({
-  //     showTopTips: true
-  //   });
-  //   setTimeout(function () {
-  //     that.setData({
-  //       showTopTips: false
-  //     });
-  //   }, 3000);
-  // },
   changeDateFm: function (e) {
     _setting_.setParam(this, {
       tcDateFm: e.detail.value

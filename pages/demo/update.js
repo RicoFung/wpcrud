@@ -1,13 +1,16 @@
 // pages/demo/update.js
 // 引入 js ////////////////////////////////////////
 var moment = require('../../utils/moment');
-var _setting_ = require('_setting_.js');
+var request = require('../../utils/request');
+var _setting_ = require('_setting_');
 //////////////////////////////////////////////////
 Page({
   /**
    * 页面的初始数据
    */
   data: {
+    tips_show: false,
+    tips_msg: '',
     tcRowid: '',
     tcPic: '',
     tcName: '',
@@ -94,6 +97,22 @@ Page({
    * fn 函数 
    ***********************************************************/
   /**
+   * 显示顶部提示
+   */
+  fnShowTopTips: function (msg) {
+    var that = this;
+    this.setData({
+      tips_show: true,
+      tips_msg: msg
+    });
+    setTimeout(function () {
+      that.setData({
+        tips_show: false
+      });
+    }, 3000);
+  },
+
+  /**
    * 顶部刷新
    */
   fnUpperRefresh: function () {
@@ -105,46 +124,12 @@ Page({
    */
   fnGet: function () {
     var that = this;
-    wx.showNavigationBarLoading(); //在标题栏中显示加载
-    wx.showLoading({ title: '加载中' });
-    wx.request({
-      //url: 'https://119.23.57.155:9443/wp_crud/wp/tbdemo/get.action',
-      url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/get.action', //仅为示例，并非真实的接口地址
+    // 发送请求
+    request.send({
+      url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/get.action',
       data: { tcRowid: that.data.tcRowid },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        if (res.statusCode == "200") {
-          if (res.data.success) {
-            that.fnRefreshData(res.data.data);
-          }
-          else {
-            wx.showModal({
-              title: 'Fail',
-              content: JSON.stringify(res.data.msg),
-              showCancel: false
-            });
-          }
-        } else {
-          wx.showModal({
-            title: 'Fail',
-            content: JSON.stringify(res),
-            showCancel: false
-          });
-        }
-      },
-      fail: function (res) {
-        // console.log(res.data);
-        wx.showModal({
-          title: 'fail',
-          content: JSON.stringify(res),
-          showCancel: false
-        });
-      },
-      complete: function () {
-        wx.hideNavigationBarLoading(); //完成停止加载
-        wx.hideLoading();
+      onRequestSuccess: function (res) {
+        that.fnRefreshData(res.data.data);
       }
     });
   },
@@ -172,19 +157,12 @@ Page({
     // 传入表单数据，调用验证方法
     if (!_setting_.WxValidate.checkForm(e)) {
       var error = _setting_.WxValidate.errorList[0];
-      wx.showModal({
-        content: error.msg,
-        showCancel: false
-      });
+      this.fnShowTopTips(error.msg);
       return false;
     }
     // 发送请求
-    var that = this;
-    wx.showNavigationBarLoading(); //在标题栏中显示加载
-    wx.showLoading({ title: '保存中' });
-    wx.request({
-      //url: 'https://119.23.57.155:9443/wp_crud/wp/tbdemo/get.action',
-      url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/upd.action', //仅为示例，并非真实的接口地址
+    request.send({
+      url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/upd.action',
       data: {
         tcRowid: e.detail.value.tcRowid,
         tcPic: e.detail.value.tcPic,
@@ -192,42 +170,12 @@ Page({
         tcPrice: e.detail.value.tcPrice,
         tcDate: e.detail.value.vDate + ' ' + e.detail.value.vTime
       },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        if (res.statusCode == "200") {
-          if (res.data.success) {
-            wx.reLaunch({ url: 'query' });
-          }
-          else {
-            wx.showModal({
-              title: 'Fail',
-              content: JSON.stringify(res.data.msg),
-              showCancel: false
-            });
-          }
-        } else {
-          wx.showModal({
-            title: 'Fail',
-            content: JSON.stringify(res),
-            showCancel: false
-          });
-        }
-      },
-      fail: function (res) {
-        wx.showModal({
-          title: 'fail',
-          content: JSON.stringify(res),
-          showCancel: false
-        });
-      },
-      complete: function () {
-        wx.hideNavigationBarLoading(); //完成停止加载
-        wx.hideLoading();
+      onRequestSuccess: function (res) {
+        wx.reLaunch({ url: 'query' });
       }
     });
   },
+
   /**
    * 重置
    */

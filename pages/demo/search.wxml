@@ -4,7 +4,6 @@
     <view class="page__desc">查询</view>
   </view>
   <view class="page__bd">
-    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
     <view class="weui-cells__title">表单</view>
     <form bindsubmit="formSubmit" bindreset="formReset">
       <view class="weui-cells weui-cells_after-title">

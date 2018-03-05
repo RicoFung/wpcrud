@@ -5,6 +5,7 @@
       <view class="page__desc">修改</view>
     </view>
     <view class="page__bd">
+      <view class="weui-toptips weui-toptips_warn" wx:if="{{tips_show}}">错误提示:{{tips_msg}}</view>
       <view class="weui-cells__title">表单</view>
       <form bindsubmit="formSubmit" bindreset="formReset">
         <input name="tcRowid" value="{{tcRowid}}" hidden="true"/>

@@ -1,6 +1,7 @@
 // 引入 js ////////////////////////////////////////
-var util = require('../../utils/util.js');
-var _setting_ = require('_setting_.js');
+var util = require('../../utils/util');
+var request = require('../../utils/request');
+var _setting_ = require('_setting_');
 //////////////////////////////////////////////////
 Page(
   {
@@ -123,49 +124,20 @@ Page(
      */
     fnGetList: function(){
       var that = this;
-      that.fnShowBottomLoading(); // 显示底部加载
-      wx.showNavigationBarLoading(); //在标题栏中显示加载
-      wx.request({
-        //url: 'https://119.23.57.155:9443/wp_crud/api/wp/tbdemo/query.action',
-        url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/query.action', //仅为示例，并非真实的接口地址
+      request.send({
+        url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/query.action',
         data: that.data.param,
-        header: {
-          'content-type': 'application/json' // 默认值
+        onRequestBefore: function () {
+          that.fnShowBottomLoading(); // 显示底部加载
         },
-        success: function (res) {
-          if (res.statusCode == "200") {
-            if (res.data.success) {
-              that.fnRefreshData(res.data.data);
-            }
-            else {
-              wx.showModal({
-                title: 'Fail',
-                content: JSON.stringify(res.data.msg),
-                showCancel: false
-              });
-            }
-          } else {
-            wx.showModal({
-              title: 'Fail',
-              content: JSON.stringify(res),
-              showCancel: false
-            });
-          }
+        onRequestSuccess: function (res) { 
+          that.fnRefreshData(res.data.data); 
         },
-        fail: function(res) {
-          //  console.log(res);
-          wx.showModal({
-            title: 'Fail',
-            content: JSON.stringify(res),
-            showCancel: false
-          });
-        },
-        complete: function () {
-          that.fnHideBottomLoading(); //隐藏底部加载
-          wx.hideNavigationBarLoading(); //完成停止加载
-          wx.stopPullDownRefresh(); //停止下拉刷新
+        onRequestComplete: function (res) { 
+          that.fnHideBottomLoading(); // 隐藏底部加载
+          wx.stopPullDownRefresh(); // 停止下拉刷新
         }
-      })
+      });
     },
 
     /**
@@ -295,50 +267,19 @@ Page(
      * 删除
      */
     tapDelete: function(e) {
-      console.log(e.currentTarget.dataset.tcRowid);
       var that = this;
-      wx.showLoading({ title: '保存中' });; // 显示加载
-      wx.showNavigationBarLoading(); //在标题栏中显示加载
-      wx.request({
-        //url: 'https://119.23.57.155:9443/wp_crud/api/wp/tbdemo/query.action',
-        url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/del.action', //仅为示例，并非真实的接口地址
+      request.send({
+        url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/del.action',
         method: 'POST',
-        data: { "tcRowid": e.currentTarget.dataset.tcRowid},
         header: {
-          'content-type': 'application/x-www-form-urlencoded' // 默认值
+          'content-type': 'application/x-www-form-urlencoded'
         },
-        success: function (res) {
-          if (res.statusCode == "200") {
-            if (res.data.success) {
-              that.fnUpperRefresh();
-            }
-            else {
-              wx.showModal({
-                title: 'Fail',
-                content: JSON.stringify(res.data.msg),
-                showCancel: false
-              });
-            }
-          } else {
-            wx.showModal({
-              title: 'Fail',
-              content: JSON.stringify(res),
-              showCancel: false
-            });
-          }
+        data: { "tcRowid": e.currentTarget.dataset.tcRowid },
+        onRequestSuccess: function (res) {
+          that.fnUpperRefresh();
         },
-        fail: function (res) {
-          //  console.log(res);
-          wx.showModal({
-            title: 'Fail',
-            content: JSON.stringify(res),
-            showCancel: false
-          });
-        },
-        complete: function () {
-          wx.hideLoading(); //隐藏加载
-          wx.hideNavigationBarLoading(); //完成停止加载
-          wx.stopPullDownRefresh(); //停止下拉刷新
+        onRequestComplete: function (res) {
+          wx.stopPullDownRefresh(); // 停止下拉刷新
         }
       });
     },
@@ -349,48 +290,18 @@ Page(
     tapDeleteBatch: function (e) {
       var v = util.getSelectedValues('tcRowid', this.data.rows);
       var that = this;
-      wx.showLoading({ title: '保存中' });; // 显示加载
-      wx.showNavigationBarLoading(); //在标题栏中显示加载
-      wx.request({
-        //url: 'https://119.23.57.155:9443/wp_crud/api/wp/tbdemo/query.action',
-        url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/del.action', //仅为示例，并非真实的接口地址
+      request.send({
+        url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/del.action',
         method: 'POST',
-        data: {tcRowid: v},
         header: {
-          'content-type': 'application/x-www-form-urlencoded' // 默认值
+          'content-type': 'application/x-www-form-urlencoded'
         },
-        success: function (res) {
-          if (res.statusCode == "200") {
-            if (res.data.success) {
-              that.fnUpperRefresh();
-            }
-            else {
-              wx.showModal({
-                title: 'Fail',
-                content: JSON.stringify(res.data.msg),
-                showCancel: false
-              });
-            }
-          } else {
-            wx.showModal({
-              title: 'Fail',
-              content: JSON.stringify(res),
-              showCancel: false
-            });
-          }
+        data: { "tcRowid": v },
+        onRequestSuccess: function (res) {
+          that.fnUpperRefresh();
         },
-        fail: function (res) {
-          //  console.log(res);
-          wx.showModal({
-            title: 'Fail',
-            content: JSON.stringify(res),
-            showCancel: false
-          });
-        },
-        complete: function () {
-          wx.hideLoading(); //隐藏加载
-          wx.hideNavigationBarLoading(); //完成停止加载
-          wx.stopPullDownRefresh(); //停止下拉刷新
+        onRequestComplete: function (res) {
+          wx.stopPullDownRefresh(); // 停止下拉刷新
         }
       });
     },
