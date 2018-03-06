@@ -1,0 +1,3 @@
+<template name="toptips">
+  <view class="weui-toptips weui-toptips_warn" style="height: 50rpx; padding-top: 20rpx;" wx:if="{{show}}">错误提示: {{msg}}</view>
+</template>

@@ -6,8 +6,10 @@ var _setting_ = require('_setting_');
 Page(
   {
     data: {
-      tips_show: false,
-      tips_msg: '',
+      toptips: {
+        show: false,
+        msg: ''
+      },
       param: _setting_.getDefaultParam(), // 查询参数
       rows: [], // 查询结果集
       total: 0, // 总数据条数
@@ -81,21 +83,6 @@ Page(
     /***********************************************************
      * fn 函数 
      ***********************************************************/
-    /**
-     * 显示顶部提示
-     */
-    fnShowTopTips: function (msg) {
-      var that = this;
-      this.setData({
-        tips_show: true,
-        tips_msg: msg
-      });
-      setTimeout(function () {
-        that.setData({
-          tips_show: false
-        });
-      }, 3000);
-    },
 
     /**
      * 显示Loading
@@ -318,7 +305,7 @@ Page(
       var that = this;
       var v = util.getSelectedValues('tcRowid', that.data.rows);
       if (v.length < 1) {
-        this.fnShowTopTips("没有选中记录！");
+        util.showTopTips(this, "没有选中记录！");
         return false;
       }
 

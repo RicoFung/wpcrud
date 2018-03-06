@@ -26,7 +26,25 @@ function getSelectedValues (key, rows) {
   return s;
 }
 
+function showTopTips(_this, msg) {
+  _this.setData({
+    toptips: {
+      show: true,
+      msg: msg
+    }
+  });
+  setTimeout(function () {
+    _this.setData({
+      toptips: {
+        show: false,
+        msg: msg
+      }
+    });
+  }, 2000);
+}
+
 module.exports = {
   formatTime: formatTime,
-  getSelectedValues: getSelectedValues
+  getSelectedValues: getSelectedValues,
+  showTopTips: showTopTips
 }

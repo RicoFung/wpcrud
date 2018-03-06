@@ -1,5 +1,6 @@
 // pages/demo/add.js
 // 引入 js ////////////////////////////////////////
+var util = require('../../utils/util');
 var moment = require('../../utils/moment');
 var request = require('../../utils/request');
 var _setting_ = require('_setting_');
@@ -9,8 +10,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tips_show: false,
-    tips_msg: '',
+    toptips: {
+      show: false,
+      msg: ''
+    },
     tcPic: 'ddsdfsds',
     tcName: '',
     tcPrice: 0,
@@ -92,21 +95,6 @@ Page({
   /***********************************************************
    * fn 函数 
    ***********************************************************/
-  /**
-   * 显示顶部提示
-   */
-  fnShowTopTips: function (msg) {
-    var that = this;
-    this.setData({
-      tips_show: true,
-      tips_msg: msg
-    });
-    setTimeout(function () {
-      that.setData({
-        tips_show: false
-      });
-    }, 3000);
-  },
 
   /**
    * 提交
@@ -115,7 +103,7 @@ Page({
     // 传入表单数据，调用验证方法
     if (!_setting_.WxValidate.checkForm(e)) {
       var error = _setting_.WxValidate.errorList[0];
-      this.fnShowTopTips(error.msg);
+      util.showTopTips(this, error.msg);
       return false;
     }
     // 发送请求

@@ -1,3 +1,4 @@
+<import src="../templates/template.wxml"/>
 <view class="header-toolbar">
   <button class="icon-button free-button-bordernone" style="position:fixed;left:0px;" bindtap="tapSearch" formType="submit">
     <text class="iconfont icon-search" />
@@ -8,7 +9,7 @@
 </view>
 <view class="page">
   <view class="page__bd">
-    <view class="weui-toptips weui-toptips_warn" wx:if="{{tips_show}}">错误提示:{{tips_msg}}</view>
+    <template is="toptips" data="{{...toptips}}"/>
     <scroll-view class="scroll" scroll-y="true">
       <view class="weui-panel" wx:for="{{rows}}">
         <!-- item -->

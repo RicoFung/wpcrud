@@ -1,3 +1,4 @@
+<import src="../templates/template.wxml"/>
 <scroll-view class="scroll" scroll-y="true">
   <view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
     <view class="page__hd">
@@ -5,7 +6,7 @@
       <view class="page__desc">添加</view>
     </view>
     <view class="page__bd">
-    <view class="weui-toptips weui-toptips_warn" wx:if="{{tips_show}}">错误提示:{{tips_msg}}</view>
+      <template is="toptips" data="{{...toptips}}"/>
       <view class="weui-cells__title">表单</view>
       <form bindsubmit="formSubmit" bindreset="formReset">
         <view class="weui-cells weui-cells_after-title">
