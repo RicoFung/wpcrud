@@ -120,7 +120,8 @@ Page({
     }
     // 发送请求
     request.send({
-      url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/add.action',
+      // url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/add.action',
+      url: _setting_.getUrl('add'),
       data: {
         tcPic: e.detail.value.tcPic,
         tcName: e.detail.value.tcName,

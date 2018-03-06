@@ -2,6 +2,8 @@
 import WxValidate from '../../utils/WxValidate'
 var moment = require('../../utils/moment');
 //////////////////////////////////////////////////
+//获取app变量
+var app = getApp();
 /**
  * 获取默认param
  */
@@ -53,11 +55,19 @@ function initValidate() {
   this.WxValidate = new WxValidate(rules, messages);
 }
 
+/**
+ * 模块url
+ */
+function getUrl(actionName){
+  return app.globalData.domain+'/admin/api/tbdemo/'+actionName+'.action';
+}
+
 /** 
  * export
  */
 module.exports = {
   getDefaultParam: getDefaultParam,
   setParam: setParam,
-  initValidate: initValidate
+  initValidate: initValidate,
+  getUrl: getUrl
 }

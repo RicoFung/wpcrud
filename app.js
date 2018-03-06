@@ -34,6 +34,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    domain: 'https://www.ricofung.cn/wp_crud'
   }
 })

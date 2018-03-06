@@ -1,6 +1,7 @@
 // pages/demo/get.js
 // 引入 js ////////////////////////////////////////
 var request = require('../../utils/request');
+var _setting_ = require('_setting_');
 //////////////////////////////////////////////////
 Page({
 
@@ -91,7 +92,8 @@ Page({
     var that = this;
     // 发送请求
     request.send({
-      url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/get.action',
+      // url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/get.action',
+      url: _setting_.getUrl('get'),
       data: { tcRowid: that.data.tcRowid },
       onRequestSuccess: function (res) {
         that.fnRefreshData(res.data.data);

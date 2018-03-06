@@ -8,6 +8,7 @@
 </view>
 <view class="page">
   <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{tips_show}}">错误提示:{{tips_msg}}</view>
     <scroll-view class="scroll" scroll-y="true">
       <view class="weui-panel" wx:for="{{rows}}">
         <!-- item -->

@@ -6,6 +6,8 @@ var _setting_ = require('_setting_');
 Page(
   {
     data: {
+      tips_show: false,
+      tips_msg: '',
       param: _setting_.getDefaultParam(), // 查询参数
       rows: [], // 查询结果集
       total: 0, // 总数据条数
@@ -79,6 +81,21 @@ Page(
     /***********************************************************
      * fn 函数 
      ***********************************************************/
+    /**
+     * 显示顶部提示
+     */
+    fnShowTopTips: function (msg) {
+      var that = this;
+      this.setData({
+        tips_show: true,
+        tips_msg: msg
+      });
+      setTimeout(function () {
+        that.setData({
+          tips_show: false
+        });
+      }, 3000);
+    },
 
     /**
      * 显示Loading
@@ -125,7 +142,8 @@ Page(
     fnGetList: function(){
       var that = this;
       request.send({
-        url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/query.action',
+        // url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/query.action',
+        url: _setting_.getUrl('query'),
         data: that.data.param,
         onRequestBefore: function () {
           that.fnShowBottomLoading(); // 显示底部加载
@@ -274,7 +292,8 @@ Page(
         success: function (res) {
           if (res.confirm) {
             request.send({
-              url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/del.action',
+              // url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/del.action',
+              url: _setting_.getUrl('del'),
               method: 'POST',
               header: {
                 'content-type': 'application/x-www-form-urlencoded'
@@ -297,14 +316,20 @@ Page(
      */
     tapDeleteBatch: function (e) {
       var that = this;
+      var v = util.getSelectedValues('tcRowid', that.data.rows);
+      if (v.length < 1) {
+        this.fnShowTopTips("没有选中记录！");
+        return false;
+      }
+
       wx.showModal({
         title: '提示',
         content: '确认删除？',
         success: function (res) {
           if (res.confirm) {
-            var v = util.getSelectedValues('tcRowid', that.data.rows);
             request.send({
-              url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/del.action',
+              // url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/del.action',
+              url: _setting_.getUrl('del'),
               method: 'POST',
               header: {
                 'content-type': 'application/x-www-form-urlencoded'
