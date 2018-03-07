@@ -16,7 +16,7 @@
         <view class="item">
           <!-- item-select  -->
           <view class="item-select">
-            <icon class="icon-select" bindtap="tapSwitchSelect" data-index="{{index}}" data-id="{{index}}" type="{{item.isSelect?'success':'circle'}}" size="16"/>
+            <icon class="icon-select" bindtap="tapSwitchSelect" data-index="{{index}}" data-id="{{index}}" type="{{item.isSelect?'success':'circle'}}" size="20"/>
           </view>
           <!-- item-navigator -->
           <navigator url="/pages/demo/get?tcRowid={{item.tcRowid}}" class="weui-cell weui-cell_access item-navigator" hover-class="weui-cell_active">
@@ -51,7 +51,7 @@
   </view>
 </view>
 <view class="footer-toolbar">
-  <icon class="icon-allselect" bindtap="tapSwitchSelectAll" type="{{isAllSelect?'success':'circle'}}" size="16"/>
+  <icon class="icon-allselect" bindtap="tapSwitchSelectAll" type="{{isAllSelect?'success':'circle'}}" size="20"/>
   <text class="footer-toolbar-qty">已选中：{{totalSelected}}</text>
   <text class="footer-toolbar-qty">共：{{totalNow}} / {{total}}</text>
   <button class="icon-button free-button-bordernone" style="position:fixed;right:0px;" bindtap="tapDeleteBatch" formType="submit">
