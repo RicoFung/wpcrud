@@ -8,7 +8,7 @@
     <view class="page__bd">
       <template is="toptips" data="{{...toptips}}" />
       <view class="weui-cells__title">表单</view>
-      <form bindsubmit="formSubmit" bindreset="formReset">
+      <!-- <form bindsubmit="formSubmit" bindreset="formReset"> -->
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell">
             <view class="weui-cell__bd">
@@ -19,13 +19,13 @@
                 </view>
                 <view class="weui-uploader__bd">
                   <view class="weui-uploader__files" id="uploaderFiles">
-                    <block wx:for="{{uploader_files_paths}}" wx:key="*this">
-                      <view class="weui-uploader__file" id="{{item}}">
-                        <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" bindtap="tapPreviewImage"/>
+                    <block wx:for="{{rows}}" wx:key="*this">
+                      <view class="weui-uploader__file" id="{{item.tcRowid}}">
+                        <image class="weui-uploader__img" src="{{item.tcName}}" mode="aspectFill" bindtap="tapPreviewImage"/>
                         <!-- item-toolbar -->
                         <view class="weui-media-box__info item-toolbar" style="border: solid 1px red">
                           <view class="weui-media-box__info__meta" style="border: solid 1px red;">
-                            <text class="iconfont icon-delete" bindtap="tapDeleteImage" />
+                            <text class="iconfont icon-delete"  data-tc-rowid="{{item.tcRowid}}" bindtap="tapDeleteImage" />
                           </view>
                         </view>
                         <!-- /item-toolbar -->
@@ -42,11 +42,13 @@
             </view>
           </view>
         </view>
+<!-- 
         <view class="weui-btn-area">
           <button class="weui-btn" type="primary" formType="submit">确定</button>
           <button class="weui-btn" type="default" formType="reset">重置</button>
         </view>
-      </form>
+         -->
+      <!-- </form> -->
     </view>
   </view>
 </scroll-view>

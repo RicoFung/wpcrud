@@ -14,12 +14,13 @@ Page({
       show: false,
       msg: ''
     },
+    tcDemoRowid: '',
+    rows: [],
     uploader_files: [],
     uploader_files_paths: [],
     uploader_files_max: 9,
     uploader_files_can: 9,
-    uploader_files_now: 0,
-    tcRowid: ''
+    uploader_files_now: 0
   },
 
   /**
@@ -27,7 +28,7 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      tcRowid: options.tcRowid
+      tcDemoRowid: options.tcDemoRowid
     });
   },
 
@@ -129,15 +130,78 @@ Page({
    * 删除图片
    */
   tapDeleteImage: function (e) {
-    var index = e.currentTarget.dataset.index;
-    var files = this.data.uploader_files;
-    var files_paths = this.data.uploader_files_paths;
-    files.splice(index, 1);
-    files_paths.splice(index, 1);
-    this.setData({
-      uploader_files: files,
-      uploader_files_paths: files_paths
+    // var index = e.currentTarget.dataset.index;
+    // var files = this.data.uploader_files;
+    // var files_paths = this.data.uploader_files_paths;
+    // files.splice(index, 1);
+    // files_paths.splice(index, 1);
+    // this.setData({
+    //   uploader_files: files,
+    //   uploader_files_paths: files_paths
+    // });
+  },
+
+  /***********************************************************
+   * fn 函数 
+   ***********************************************************/
+  fnUpload: function () {
+    console.log(this.data.uploader_files)
+    var that = this;
+    // 传入表单数据，调用验证方法
+    if (this.data.uploader_files_paths.length < 1) {
+      util.showTopTips(this, '请选择图片');
+      return false;
+    }
+
+    var promise = Promise.all(this.data.uploader_files_paths.map((tempFilePath, index) => {
+      return new Promise(function (resolve, reject) {
+        wx.uploadFile({
+          url: _setting_.getUrl('tbpic/upload'),
+          filePath: tempFilePath,
+          name: 'myFile',
+          formData: {
+            'tcDemoRowid': that.data.tcDemoRowid
+          },
+          success: function (res) {
+            resolve(res.data);
+            that.setData({
+              rows: res.data.data
+            })
+          },
+          fail: function (err) {
+            reject(new Error('failed to upload file'));
+          }
+        });
+      });
+    }));
+    promise.then(function (results) {
+      console.log(results);
+    }).catch(function (err) {
+      console.log(err);
     });
+    // for (var i = 0; i < this.data.uploader_files_paths.length; i++) {
+    //   wx.showLoading({ title: 'Loading...' });; // 显示加载
+    //   wx.showNavigationBarLoading(); //在标题栏中显示加载
+    // wx.uploadFile({
+    //   url: _setting_.getUrl('tbpic/add'),
+    //   filePath: that.data.uploader_files_paths[i],
+    //   name: 'myFile',
+    //   formData: {
+    //     'tcDemoRowid': that.data.tcRowid
+    //   },
+    //   success: function (res) {
+    //     var data = res.data;
+    //     console.log(data);
+    //   },
+    //   fail: function (res) {
+    //     console.log(res);
+    //   },
+    //   complete: function () {
+    //     wx.hideLoading(); //隐藏加载
+    //     wx.hideNavigationBarLoading(); //完成停止加载
+    //   }
+    // });
+    // }
   },
 
   /***********************************************************
@@ -159,7 +223,7 @@ Page({
     var promise = Promise.all(this.data.uploader_files_paths.map((tempFilePath, index) => {
       return new Promise(function (resolve, reject) {
         wx.uploadFile({
-          url: _setting_.getUrl('tbpic/add'),
+          url: _setting_.getUrl('tbpic/upload'),
           filePath: tempFilePath,
           name: 'myFile',
           formData: {
