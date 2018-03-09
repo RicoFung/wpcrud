@@ -130,7 +130,7 @@ Page(
       var that = this;
       request.send({
         // url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/query.action',
-        url: _setting_.getUrl('query'),
+        url: _setting_.getUrl('tbdemo/query'),
         data: that.data.param,
         onRequestBefore: function () {
           that.fnShowBottomLoading(); // 显示底部加载
@@ -280,7 +280,7 @@ Page(
           if (res.confirm) {
             request.send({
               // url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/del.action',
-              url: _setting_.getUrl('del'),
+              url: _setting_.getUrl('tbdemo/del'),
               method: 'POST',
               header: {
                 'content-type': 'application/x-www-form-urlencoded'
@@ -316,7 +316,7 @@ Page(
           if (res.confirm) {
             request.send({
               // url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/del.action',
-              url: _setting_.getUrl('del'),
+              url: _setting_.getUrl('tbdemo/del'),
               method: 'POST',
               header: {
                 'content-type': 'application/x-www-form-urlencoded'
@@ -340,6 +340,15 @@ Page(
     tapUpdate: function (e) {
       wx.navigateTo({
         url: "update?tcRowid="+e.currentTarget.dataset.tcRowid
+      });
+    },
+
+    /**
+     * 图片
+     */
+    tapPic: function (e) {
+      wx.navigateTo({
+        url: "pic?tcRowid=" + e.currentTarget.dataset.tcRowid
       });
     },
 

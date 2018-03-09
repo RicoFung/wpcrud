@@ -1,12 +1,13 @@
 {
   "pages": [
     "pages/demo/query",
-    "pages/demo/add",
     "pages/demo/search",
-    "pages/index/index",
-    "pages/logs/logs",
+    "pages/demo/get",
+    "pages/demo/add",
     "pages/demo/update",
-    "pages/demo/get"
+    "pages/demo/pic",
+    "pages/index/index",
+    "pages/logs/logs"
   ],
   "window": {
     "backgroundTextStyle": "light",

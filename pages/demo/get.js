@@ -93,7 +93,7 @@ Page({
     // 发送请求
     request.send({
       // url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/get.action',
-      url: _setting_.getUrl('get'),
+      url: _setting_.getUrl('tbdemo/get'),
       data: { tcRowid: that.data.tcRowid },
       onRequestSuccess: function (res) {
         that.fnRefreshData(res.data.data);

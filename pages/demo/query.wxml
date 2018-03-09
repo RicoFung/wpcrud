@@ -41,6 +41,9 @@
           <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">
             <text class="iconfont icon-edit" data-tc-rowid="{{item.tcRowid}}" bindtap="tapUpdate" />
           </view>
+          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">
+            <text class="iconfont icon-pic" data-tc-rowid="{{item.tcRowid}}" bindtap="tapPic" />
+          </view>
         </view>
       </view>
     </scroll-view>

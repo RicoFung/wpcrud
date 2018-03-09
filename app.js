@@ -35,6 +35,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    domain: 'https://www.ricofung.cn/wp_crud'
+    domain: 'http://localhost:9090/wp_crud'
+    // domain: 'https://www.ricofung.cn/wp_crud'
   }
 })

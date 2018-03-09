@@ -115,7 +115,7 @@ Page({
     // 发送请求
     request.send({
       // url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/get.action',
-      url: _setting_.getUrl('get'),
+      url: _setting_.getUrl('tbdemo/get'),
       data: { tcRowid: that.data.tcRowid },
       onRequestSuccess: function (res) {
         that.fnRefreshData(res.data.data);
@@ -152,7 +152,7 @@ Page({
     // 发送请求
     request.send({
       // url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/upd.action',
-      url: _setting_.getUrl('upd'),
+      url: _setting_.getUrl('tbdemo/upd'),
       data: {
         tcRowid: e.detail.value.tcRowid,
         tcPic: e.detail.value.tcPic,

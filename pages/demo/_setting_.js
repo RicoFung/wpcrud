@@ -59,7 +59,7 @@ function initValidate() {
  * 模块url
  */
 function getUrl(actionName){
-  return app.globalData.domain+'/admin/api/tbdemo/'+actionName+'.action';
+  return app.globalData.domain+'/admin/api/'+actionName+'.action';
 }
 
 /** 
