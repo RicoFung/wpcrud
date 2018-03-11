@@ -58,8 +58,16 @@ function initValidate() {
 /**
  * 模块url
  */
-function getUrl(actionName){
-  return app.globalData.domain+'/admin/api/'+actionName+'.action';
+function getUrl(actionName) {
+  return app.globalData.domain+'/wp_crud/admin/api/'+actionName+'.action';
+}
+
+/**
+ * 图片域名
+ */
+function getPicDomain() {
+  // return app.globalData.domain +'/wp_crud/pic/';
+  return app.globalData.domain;
 }
 
 /** 
@@ -69,5 +77,6 @@ module.exports = {
   getDefaultParam: getDefaultParam,
   setParam: setParam,
   initValidate: initValidate,
-  getUrl: getUrl
+  getUrl: getUrl,
+  getPicDomain: getPicDomain
 }

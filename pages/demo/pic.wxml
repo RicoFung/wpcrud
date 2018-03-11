@@ -15,24 +15,24 @@
               <view class="weui-uploader">
                 <view class="weui-uploader__hd">
                   <view class="weui-uploader__title">图片上传</view>
-                  <view class="weui-uploader__info">{{uploader_files_paths.length}}/{{uploader_files_max}}</view>
+                  <view class="weui-uploader__info">{{uploader_files_now}}/{{uploader_files_max}}</view>
                 </view>
                 <view class="weui-uploader__bd">
                   <view class="weui-uploader__files" id="uploaderFiles">
                     <block wx:for="{{rows}}" wx:key="*this">
                       <view class="weui-uploader__file" id="{{item.tcRowid}}">
-                        <image class="weui-uploader__img" src="{{item.tcName}}" mode="aspectFill" bindtap="tapPreviewImage"/>
+                        <image class="weui-uploader__img" src="{{picDomain+item.tcName}}" data-url="{{picDomain+item.tcName}}" mode="aspectFill" bindtap="tapPreview"/>
                         <!-- item-toolbar -->
-                        <view class="weui-media-box__info item-toolbar" style="border: solid 1px red">
-                          <view class="weui-media-box__info__meta" style="border: solid 1px red;">
-                            <text class="iconfont icon-delete"  data-tc-rowid="{{item.tcRowid}}" bindtap="tapDeleteImage" />
+                        <view class="weui-media-box__info item-toolbar">
+                          <view class="weui-media-box__info__meta">
+                            <text class="iconfont icon-delete"  data-tc-rowid="{{item.tcRowid}}" bindtap="tapDelete" />
                           </view>
                         </view>
                         <!-- /item-toolbar -->
                       </view>
                     </block>
                   </view>
-                  <block wx:if="{{uploader_files.length < uploader_files_max}}"> 
+                  <block wx:if="{{uploader_files_now < uploader_files_max}}"> 
                   <view class="weui-uploader__input-box">
                     <view class="weui-uploader__input" bindtap="tapChooseImage"></view>
                   </view>

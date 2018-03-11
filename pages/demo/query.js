@@ -1,7 +1,7 @@
 // 引入 js ////////////////////////////////////////
-var util = require('../../utils/util');
-var request = require('../../utils/request');
-var _setting_ = require('_setting_');
+var util = require('../../utils/util')
+var request = require('../../utils/request')
+var _setting_ = require('_setting_')
 //////////////////////////////////////////////////
 Page(
   {
@@ -27,8 +27,8 @@ Page(
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-      _setting_.setParam(this, options);
-      this.fnGetList();
+      _setting_.setParam(this, options)
+      this.fnGetList()
     },
 
     /**
@@ -63,14 +63,14 @@ Page(
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-      this.fnUpperRefresh();
+      this.fnUpperRefresh()
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-      this.fnLowerRefresh();
+      this.fnLowerRefresh()
     },
 
     /**
@@ -90,7 +90,7 @@ Page(
     fnShowBottomLoading: function () {
       this.setData({
         isHideBottomLoading: false
-      });
+      })
     },
 
     /**
@@ -99,7 +99,7 @@ Page(
     fnHideBottomLoading: function () {
       this.setData({
         isHideBottomLoading: true
-      });
+      })
     },
 
     /**
@@ -111,38 +111,38 @@ Page(
         order: _setting_.getDefaultParam().order,
         limit: _setting_.getDefaultParam().limit,
         offset: _setting_.getDefaultParam().offset
-      });
-      this.fnGetList();
+      })
+      this.fnGetList()
     },
 
     /**
      * 底部刷新
      */
     fnLowerRefresh: function () {
-      if (this.data.total > 0 && this.data.rows.length == this.data.total) return;
-      this.fnGetList();
+      if (this.data.total > 0 && this.data.rows.length == this.data.total) return
+      this.fnGetList()
     },
 
     /**
      * 获取列表数据
      */
     fnGetList: function(){
-      var that = this;
+      var that = this
       request.send({
         // url: 'http://localhost:9090/wp_crud/admin/api/tbdemo/query.action',
         url: _setting_.getUrl('tbdemo/query'),
         data: that.data.param,
         onRequestBefore: function () {
-          that.fnShowBottomLoading(); // 显示底部加载
+          that.fnShowBottomLoading() // 显示底部加载
         },
         onRequestSuccess: function (res) { 
-          that.fnRefreshData(res.data.data); 
+          that.fnRefreshData(res.data.data) 
         },
         onRequestComplete: function (res) { 
-          that.fnHideBottomLoading(); // 隐藏底部加载
-          wx.stopPullDownRefresh(); // 停止下拉刷新
+          that.fnHideBottomLoading() // 隐藏底部加载
+          wx.stopPullDownRefresh() // 停止下拉刷新
         }
-      });
+      })
     },
 
     /**
@@ -150,23 +150,23 @@ Page(
      */
     fnRefreshData: function(data) {
       if(this.data.param.offset==0) {// 顶部刷新
-        _setting_.setParam(this, { offset: this.data.param.offset + data.rows.length });
+        _setting_.setParam(this, { offset: this.data.param.offset + data.rows.length })
         this.setData({
           rows: data.rows,
           total: data.total,
           totalNow: data.rows.length
-        });
-        this.fnRefreshSelect("top");
+        })
+        this.fnRefreshSelect("top")
       } 
       else {// 底部刷新
-        _setting_.setParam(this, { offset: this.data.param.offset + this.data.param.limit });
-        var new_rows = this.data.rows.concat(data.rows);
+        _setting_.setParam(this, { offset: this.data.param.offset + this.data.param.limit })
+        var new_rows = this.data.rows.concat(data.rows)
         this.setData({
           rows: new_rows,
           total: data.total,
           totalNow: new_rows.length
-        });
-        this.fnRefreshSelect("bottom");
+        })
+        this.fnRefreshSelect("bottom")
       }
     },
 
@@ -179,21 +179,21 @@ Page(
         this.setData({
           isAllSelect: false,
           totalSelected: 0
-        });
+        })
       } 
       // 底部刷新
       else if (option == "bottom") {
          // 全选
         if (this.data.isAllSelect) { 
-          var countSelected = this.data.rows.length;
+          var countSelected = this.data.rows.length
           for (var i = 0; i < this.data.rows.length; i++) {
-            this.data.rows[i].isSelect = true;
+            this.data.rows[i].isSelect = true
           }
           this.setData({
             rows: this.data.rows,
             isAllSelect: true,
             totalSelected: countSelected
-          });
+          })
         } 
         // 非全选
         else { 
@@ -209,29 +209,29 @@ Page(
      */
     tapSwitchSelect: function (e) {
       // 获取item项的id，和数组的下标值  
-      let id = e.target.dataset.id;
-      let index = parseInt(e.target.dataset.index);
-      this.data.rows[index].isSelect = !this.data.rows[index].isSelect;
+      let id = e.target.dataset.id
+      let index = parseInt(e.target.dataset.index)
+      this.data.rows[index].isSelect = !this.data.rows[index].isSelect
       // 统计选项
       if (this.data.rows[index].isSelect) {
-        this.data.totalSelected++;
+        this.data.totalSelected++
       }
       else {
-        this.data.totalSelected--;
+        this.data.totalSelected--
       }
       // 全选判断
       if (this.data.rows.length == this.data.totalSelected) {
-        this.data.isAllSelect = true;
+        this.data.isAllSelect = true
       }
       else {
-        this.data.isAllSelect = false;
+        this.data.isAllSelect = false
       }
       // 更新data
       this.setData({
         rows: this.data.rows,
         totalSelected: this.data.totalSelected,
         isAllSelect: this.data.isAllSelect,
-      });
+      })
     },
 
     /**
@@ -239,24 +239,24 @@ Page(
      */
     tapSwitchSelectAll: function (e) {
       // 处理全选逻辑
-      var countSelected = 0;
+      var countSelected = 0
       if (!this.data.isAllSelect) {
         for (var i = 0; i < this.data.rows.length; i++) {
-          this.data.rows[i].isSelect = true;
+          this.data.rows[i].isSelect = true
         }
-        countSelected = this.data.rows.length;
+        countSelected = this.data.rows.length
       } else {
         for (var i = 0; i < this.data.rows.length; i++) {
-          this.data.rows[i].isSelect = false;
+          this.data.rows[i].isSelect = false
         }
-        countSelected = 0;
+        countSelected = 0
       }
       // 更新data
       this.setData({
         rows: this.data.rows,
         isAllSelect: !this.data.isAllSelect,
         totalSelected: countSelected
-      });
+      })
     },
 
     /**
@@ -265,14 +265,14 @@ Page(
     tapAdd: function () {
       wx.navigateTo({
         url: "add"
-      });
+      })
     },
 
     /**
      * 删除
      */
     tapDelete: function (e) {
-      var that = this;
+      var that = this
       wx.showModal({
         title: '提示',
         content: '确认删除？',
@@ -287,26 +287,26 @@ Page(
               },
               data: { "tcRowid": e.currentTarget.dataset.tcRowid },
               onRequestSuccess: function (res) {
-                that.fnUpperRefresh();
+                that.fnUpperRefresh()
               },
               onRequestComplete: function (res) {
-                wx.stopPullDownRefresh(); // 停止下拉刷新
+                wx.stopPullDownRefresh() // 停止下拉刷新
               }
-            });
+            })
           }
         }
-      });
+      })
     },
 
     /**
      * 批量删除
      */
     tapDeleteBatch: function (e) {
-      var that = this;
-      var v = util.getSelectedValues('tcRowid', that.data.rows);
+      var that = this
+      var v = util.getSelectedValues('tcRowid', that.data.rows)
       if (v.length < 1) {
-        util.showTopTips(this, "没有选中记录！");
-        return false;
+        util.showTopTips(this, "没有选中记录！")
+        return false
       }
 
       wx.showModal({
@@ -323,15 +323,15 @@ Page(
               },
               data: { "tcRowid": v },
               onRequestSuccess: function (res) {
-                that.fnUpperRefresh();
+                that.fnUpperRefresh()
               },
               onRequestComplete: function (res) {
-                wx.stopPullDownRefresh(); // 停止下拉刷新
+                wx.stopPullDownRefresh() // 停止下拉刷新
               }
-            });
+            })
           }
         }
-      });
+      })
     },
 
     /**
@@ -340,7 +340,7 @@ Page(
     tapUpdate: function (e) {
       wx.navigateTo({
         url: "update?tcRowid="+e.currentTarget.dataset.tcRowid
-      });
+      })
     },
 
     /**
@@ -348,15 +348,14 @@ Page(
      */
     tapPic: function (e) {
       wx.navigateTo({
-        url: "pic?tcRowid=" + e.currentTarget.dataset.tcRowid
-      });
+        url: "pic?tcDemoRowid=" + e.currentTarget.dataset.tcRowid
+      })
     },
 
     /**
      * 查询
      */
     tapSearch: function () {
-      console.log(this.data.param);
       wx.navigateTo({
         url: "search"
         + '?tcName=' + this.data.param.tcName
@@ -364,6 +363,6 @@ Page(
         + '&tcTimeFm=' + this.data.param.tcTimeFm
         + '&tcDateTo=' + this.data.param.tcDateTo 
         + '&tcTimeTo=' + this.data.param.tcTimeTo
-      });
+      })
     }
-  });
+  })

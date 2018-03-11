@@ -1,9 +1,9 @@
 // pages/demo/add.js
 // 引入 js ////////////////////////////////////////
-var util = require('../../utils/util');
-var moment = require('../../utils/moment');
-var request = require('../../utils/request');
-var _setting_ = require('_setting_');
+var util = require('../../utils/util')
+var moment = require('../../utils/moment')
+var request = require('../../utils/request')
+var _setting_ = require('_setting_')
 //////////////////////////////////////////////////
 Page({
   /**
@@ -26,7 +26,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    _setting_.initValidate();
+    _setting_.initValidate()
   },
 
   /**
@@ -84,12 +84,12 @@ Page({
   changeDate: function (e) {
     this.setData({
       vDate: e.detail.value
-    });
+    })
   },
   changeTime: function (e) {
     this.setData({
       vTime: e.detail.value
-    });
+    })
   },
 
   /***********************************************************
@@ -102,9 +102,9 @@ Page({
   formSubmit: function (e) {
     // 传入表单数据，调用验证方法
     if (!_setting_.WxValidate.checkForm(e)) {
-      var error = _setting_.WxValidate.errorList[0];
-      util.showTopTips(this, error.msg);
-      return false;
+      var error = _setting_.WxValidate.errorList[0]
+      util.showTopTips(this, error.msg)
+      return false
     }
     // 发送请求
     request.send({
@@ -117,9 +117,9 @@ Page({
         tcDate: e.detail.value.vDate + ' ' + e.detail.value.vTime
       },
       onRequestSuccess: function (res) {
-        wx.reLaunch({ url: 'query' });
+        wx.reLaunch({ url: 'query' })
       }
-    });
+    })
   },
   /**
    * 重置
@@ -132,6 +132,6 @@ Page({
       tcDate: moment().format("YYYY-MM-DD h:mm"),
       vDate: moment().format("l"),
       vTime: moment().format("h:mm")
-    });
+    })
   }
 })

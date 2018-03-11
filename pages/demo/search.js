@@ -1,5 +1,5 @@
 // 引入 js ////////////////////////////////////////
-var _setting_ = require('_setting_');
+var _setting_ = require('_setting_')
 //////////////////////////////////////////////////
 Page({
   data: {
@@ -9,27 +9,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    _setting_.setParam(this, options);
+    _setting_.setParam(this, options)
   },
   changeDateFm: function (e) {
     _setting_.setParam(this, {
       tcDateFm: e.detail.value
-    });
+    })
   },
   changeTimeFm: function (e) {
     _setting_.setParam(this, {
       tcTimeFm: e.detail.value
-    });
+    })
   },
   changeDateTo: function (e) {
     _setting_.setParam(this, {
       tcDateTo: e.detail.value
-    });
+    })
   },
   changeTimeTo: function (e) {
     _setting_.setParam(this, {
       tcTimeTo: e.detail.value
-    });
+    })
   },
   /**
    * 搜索
@@ -42,12 +42,12 @@ Page({
       + '&tcTimeFm=' + e.detail.value.tcTimeFm
       + '&tcDateTo=' + e.detail.value.tcDateTo
       + '&tcTimeTo=' + e.detail.value.tcTimeTo
-    });
+    })
   },
   /**
    * 重置
    */
   formReset: function () {
-    _setting_.setParam(this, _setting_.getDefaultParam());
+    _setting_.setParam(this, _setting_.getDefaultParam())
   }
-});
+})
