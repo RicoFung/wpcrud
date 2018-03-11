@@ -35,14 +35,14 @@
           <view class="weui-media-box__info__meta">
             <text>{{item.tcDate}}</text>
           </view>
-          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">
-            <text class="iconfont icon-delete" data-tc-rowid="{{item.tcRowid}}" bindtap="tapDelete" />
+          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" data-tc-rowid="{{item.tcRowid}}" bindtap="tapDelete" >
+            <text class="iconfont icon-delete"/>
           </view>
-          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">
-            <text class="iconfont icon-edit" data-tc-rowid="{{item.tcRowid}}" bindtap="tapUpdate" />
+          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" data-tc-rowid="{{item.tcRowid}}" bindtap="tapUpdate" >
+            <text class="iconfont icon-edit"/>
           </view>
-          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">
-            <text class="iconfont icon-pic" data-tc-rowid="{{item.tcRowid}}" bindtap="tapPic" />
+          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" data-tc-rowid="{{item.tcRowid}}" bindtap="tapPic" >
+            <text class="iconfont icon-pic"/>
           </view>
         </view>
       </view>
