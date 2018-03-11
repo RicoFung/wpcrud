@@ -15,7 +15,7 @@ var default_config = {
 function send(new_config) {
   var config = Object.assign({}, default_config, new_config);
   config.onRequestBefore();
-  wx.showLoading({ title: 'Loading...' });; // 显示加载
+  wx.showLoading({ title: 'Loading...' }); // 显示加载
   wx.showNavigationBarLoading(); //在标题栏中显示加载
   wx.request({
     url: config.url,

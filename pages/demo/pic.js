@@ -155,6 +155,8 @@ Page({
     }
     // 批量异步上传
     var promise = Promise.all(this.data.uploader_files_paths.map((tempFilePath, index) => {
+      wx.showLoading({ title: 'Loading...' });; // 显示加载
+      wx.showNavigationBarLoading(); //在标题栏中显示加载
       return new Promise(function (resolve, reject) {
         wx.uploadFile({
           url: _setting_.getUrl('tbpic/upload'),
@@ -173,8 +175,12 @@ Page({
       })
     }))
     promise.then(function (results) {
+      wx.hideLoading() //隐藏加载
+      wx.hideNavigationBarLoading() //完成停止加载
       that.fnQuery()
     }).catch(function (err) {
+      wx.hideLoading() //隐藏加载
+      wx.hideNavigationBarLoading() //完成停止加载
       wx.showModal({
         title: 'Fail',
         content: JSON.stringify(err),
